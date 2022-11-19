@@ -13,6 +13,24 @@ use App\Coupon;
 session_start();
 class CartController extends Controller
 {
+    public function gio_hang(Request $request){
+        //slide
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+        //seo
+        $meta_desc = "Chuyên bán những cây cảnh lâu năm";
+        $meta_keywords = "thiết bị cây cảnh,phụ kiện cắt tỉa,đồ dùng nông nghiệp";
+        $meta_title = "Phụ kiện,thiết bị cho cây cảnh chính hãng";
+        $url_canonical = $request->url();
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        return view('pages.cart.index_cart')
+            ->with('slider',$slider)
+            ->with('meta_desc',$meta_desc)
+            ->with('meta_keywords',$meta_keywords)
+            ->with('meta_title',$meta_title)
+            ->with('url_canonical',$url_canonical)
+            ->with('category',$cate_product);
+
+    }
     public function check_coupon(Request $request){
         $data = $request->all();
         $coupon = Coupon::where('coupon_code',$data['coupon'])->first();
@@ -48,21 +66,7 @@ class CartController extends Controller
             return redirect()->back()->with('error','Mã giảm giá không đúng');
         }
     }
-    public function gio_hang(Request $request){
-         //seo
-         //slide
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
 
-        $meta_desc = "Giỏ hàng của bạn";
-        $meta_keywords = "Giỏ hàng Ajax";
-        $meta_title = "Giỏ hàng Ajax";
-        $url_canonical = $request->url();
-        //--seo
-        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-
-        return view('pages.cart.cart_ajax')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider);
-    }
     public function add_cart_ajax(Request $request){
         // Session::forget('cart');
         $data = $request->all();

@@ -30,20 +30,23 @@ use App\Http\Controllers\BlogController;
 |
 */
 //Frontend
-//Route::get('/','HomeController@index' );
-//Route::get('/trang-chu','HomeController@index');
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/gioi-thieu', [HomeController::class, 'introduce']);
+Route::get('/san-pham', [HomeController::class, 'product']);
+Route::get('/tin-tuc', [HomeController::class, 'blog']);
+Route::get('/lien-he', [HomeController::class, 'contact']);
+
 //Route::get('/404','HomeController@error_page');
-//Route::get('/tin-tuc','HomeController@blog_index')->name('tintuc');
-//Route::get('/lien-he','HomeController@contact')->name('lienhe');
+
 //Route::post('/tim-kiem','HomeController@search');
 //
 //Route::get('/details_post/{slug}','HomeController@post_detail')->name('detail_post');
 
 
 //Danh muc san pham trang chu
-Route::get('/danh-muc/{slug_category_product}','CategoryProduct@show_category_home');
-Route::get('/thuong-hieu/{brand_slug}','BrandProduct@show_brand_home');
-Route::get('/chi-tiet/{product_slug}','ProductController@details_product');
+Route::get('/danh-muc/{slug_category_product}', [CategoryProduct::class, 'show_category_home']);
+
+Route::get('/chi-tiet/{product_slug}', [ProductController::class, 'details_product']);
 
 //Backend
 Route::get('/admin', [AdminController::class, 'index']);
