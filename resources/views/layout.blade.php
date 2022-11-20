@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" type="text/css" href="Caycanh/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="Caycanh/slick/slick-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.9/dist/sweetalert2.min.css">
 
     <link rel="stylesheet" href="Caycanh/css/style.css">
 </head>
@@ -111,9 +112,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Dịch vụ</a>
                             </li>
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="#">Hỗ trợ khách hàng</a>--}}
-{{--                            </li>--}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Hỗ trợ khách hàng</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{URL::to('/gio-hang')}}">Giỏ hàng</a>
                             </li>
@@ -249,5 +250,56 @@
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.9/dist/sweetalert2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.add-to-cart').click(function(){
+            var id = $(this).data('id_product');
+            // alert(id);
+            var cart_product_id = $('.cart_product_id_' + id).val();
+            var cart_product_name = $('.cart_product_name_' + id).val();
+            var cart_product_image = $('.cart_product_image_' + id).val();
+            var cart_product_quantity = $('.cart_product_quantity_' + id).val();
+            var cart_product_price = $('.cart_product_price_' + id).val();
+            var cart_product_qty = $('.cart_product_qty_' + id).val();
+            var _token = $('input[name="_token"]').val();
+            if(parseInt(cart_product_qty)>parseInt(cart_product_quantity)){
+                alert('Làm ơn đặt nhỏ hơn ' + cart_product_quantity);
+            }else{
+
+                $.ajax({
+                    url: '{{url('/add-cart-ajax')}}',
+                    method: 'POST',
+                    data:{cart_product_id:cart_product_id,
+                        cart_product_name:cart_product_name,
+                        cart_product_image:cart_product_image,
+                        cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,
+                        _token:_token,cart_product_quantity:cart_product_quantity
+                    },
+                    success:function(){
+
+                        console.log('tra ve');
+                        {{--swal({--}}
+                        {{--        title: "Đã thêm sản phẩm vào giỏ hàng",--}}
+                        {{--        text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",--}}
+                        {{--        showCancelButton: true,--}}
+                        {{--        cancelButtonText: "Xem tiếp",--}}
+                        {{--        confirmButtonClass: "btn-success",--}}
+                        {{--        confirmButtonText: "Đi đến giỏ hàng",--}}
+                        {{--        closeOnConfirm: false--}}
+                        {{--    },--}}
+                        {{--    function() {--}}
+                        {{--        window.location.href = "{{url('/gio-hang')}}";--}}
+                        {{--    });--}}
+
+                    }
+
+                });
+            }
+
+
+        });
+    });
+</script>
 </body>
 </html>

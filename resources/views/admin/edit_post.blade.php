@@ -32,13 +32,13 @@
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Danh mục tin tức</label>
                                 <select name="brand_id" class="form-control input-sm m-bot15">
-                                    @foreach($brand as $key => $cate)
-                                        @if($cate->brand_id==$edit->brand_id)
-                                        <option selected value="{{$cate->brand_id}}">{{$cate->brand_name}}</option>
-                                        @else
-                                            <option value="{{$cate->brand_id}}">{{$cate->brand_name}}</option>
-                                        @endif
-                                    @endforeach
+{{--                                    @foreach($brand as $key => $cate)--}}
+{{--                                        @if($cate->brand_id==$edit->brand_id)--}}
+{{--                                        <option selected value="{{$cate->brand_id}}">{{$cate->brand_name}}</option>--}}
+{{--                                        @else--}}
+{{--                                            <option value="{{$cate->brand_id}}">{{$cate->brand_name}}</option>--}}
+{{--                                        @endif--}}
+{{--                                    @endforeach--}}
 
                                 </select>
                             </div>
@@ -56,6 +56,15 @@
                                 <input type="text" value="{{$edit->key_word}}" data-validation="length" data-validation-length="min5" data-validation-error-msg="Làm ơn điền ít nhất 5 ký tự" name="key_word" class="form-control " placeholder="Từ khoá tìm kiếm" >
                             </div>
 
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Tin nổi bật </label>
+                                <select class="form-control" name="hot_news">
+                                    <option value="">{{($edit->hot_news == 1) ? 'Tin nổi bật' : 'không' }}</option>
+                                    <option value="1">Tin nổi bật</option>
+                                    <option value="0">Không</option>
+                                </select>
+
+                            </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nội dung bài viết</label>
                                 <textarea style="resize: none" rows="8" class="form-control" name="content"  id="id5" placeholder="Nội dung bài viết">{{$edit->content}}</textarea>

@@ -103,13 +103,13 @@ Route::get('/add-product', [ProductController::class, 'add_product']);
 Route::get('/edit-product/{product_id}', [ProductController::class, 'edit_product']);
 
 // });
+//Route::get('users',
+
 Route::get('users',
-    [
-        'uses'=>[UserController::class, 'index'],
-        'as'=> 'Users',
-        'middleware'=> 'roles'
-        // 'roles' => ['admin','author']
-    ]);
+    [UserController::class, 'index'],
+    ['middleware'=> 'roles'],
+    ['as'=>'Users']
+);
 Route::get('add-users', [UserController::class, 'add_users']);
 Route::post('store-users', [UserController::class, 'store_users']);
 Route::post('assign-roles', [UserController::class, 'assign_roles']);

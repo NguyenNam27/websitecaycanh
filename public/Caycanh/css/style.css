@@ -23,7 +23,7 @@
 }
 
 #vt-top ul{
-	list-style: none;	
+	list-style: none;
 	float: right;
 	margin: auto 10%;
 }
@@ -94,7 +94,7 @@ header .item {
 	display: flex;
 	align-items: center;
 	background-color: #ff3f00;
-	color: #fff;	
+	color: #fff;
 }
 
 #vt-nav a{
@@ -112,7 +112,7 @@ header .item {
 }
 
 .menu-trai ul li a{
-	display: block;		
+	display: block;
 	padding: 0px 10px;
 	text-decoration: none;
 }
@@ -139,7 +139,7 @@ header .item {
 
 .title-product{
 	background-color: #f5f5f5;
-	margin-top: 15px;	
+	margin-top: 15px;
 }
 
 .title-product .row{
@@ -233,19 +233,19 @@ header .item {
 	margin-top: -4px;
 	opacity: 0.7;
 }
- 
+
 .vt-footer a{
 	color: #fff;
-	
+
 }
 
 .footer-nav a:hover{
 	color: gold;
-	
+
 }
 
 .fa-icon {
-  
+
   border: 1px solid #fff;
   color: white;
   border-radius: 50%;
@@ -396,19 +396,19 @@ header .item {
     position: absolute;
     top: 40%;
     width: auto;
-    
+
     margin-top: -50px;
     margin: 0px -10px;
     color: gray;
     font-size: 40px;
     user-select: none;
     -webkit-user-select: none;
-    
+
 }
 
 .next {
   right: 0;
-  
+
 }
 
 @media only screen and (max-width: 1024px) {
@@ -480,11 +480,13 @@ header .item {
 	border-bottom: 2px solid #46ad0e;
 }
 .tieude_img{
+    width: 100%;
 	float: left;
 	border: 1px solid #eaeaea;
-	margin-right: 13px; 
+	margin-right: 13px;
 }
 .tintuc1{
+
     font-size: 14px;
     border-bottom: 1px dotted #bfbfbf;
     margin-top: 9px;
@@ -514,13 +516,14 @@ header .item {
 .tintuc_right{
 	padding: 0px;
 }
-.tintuc2_right{ 
+.tintuc2_right{
 	padding: 20px 13px 28px 0px ;
 	border-bottom: 1px solid #bfbfbf;
 
 
 }
 .text_tintuc2_right{
+    color: black;
 	margin-bottom: 0px;
 	font-size: 18px;
 	/* font-family: 'OpenSans-SemiBold'; */
@@ -529,6 +532,7 @@ header .item {
 
 }
 .text2_tintuc2_right{
+    color: #888888;
 	text-align: justify;
 	font-size: 14px;
 }

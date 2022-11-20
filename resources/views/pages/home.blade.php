@@ -114,46 +114,18 @@
         <div class="container">
             <h2 class="text-center" >TIN TỨC</h2><br>
             <div class="row">
+                @foreach($blog as $blog)
                 <div class="col-12 col-sm-6 col-md-3 pad">
                     <div class="img-thumbnail thumbnail1">
-                        <img src="Caycanh/img/anh3.png" alt="" width="100%">
+                        <img src="{{asset('public/uploads/post/'.$blog->image)}}" alt="" width="100%">
                         <div class="tintuc">
-                            <h5><strong>Cây Kim Ngân hợp với tuổi nào ?</strong></h5>
-                            <img src="Caycanh/img/icon2.png" alt=""> <small>28/06/2016</small>
-                            <p><small>Cây Kim Ngân là một trong những cây hàng đầu về phong thủy. Cây kim ngân hay còn gọi là cây Tiền mang đến cho gia chủ tiền vàng... </small></p>
+                           <a> <h5><strong>{{$blog->title}}</strong></h5></a>
+                            <img src="Caycanh/img/icon2.png" alt=""> <small>{{$blog->created_at}}</small>
+                            <p><small>{{strip_tags($blog->short_description)}} </small></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-md-3 pad">
-                    <div class="img-thumbnail thumbnail1">
-                        <img src="Caycanh/img/anh3.png" alt="" width="100%">
-                        <div class="tintuc">
-                            <h5><strong>Cây Kim Ngân hợp với tuổi nào ?</strong></h5>
-                            <img src="Caycanh/img/icon2.png" alt=""> <small>28/06/2016</small>
-                            <p><small>Cây Kim Ngân là một trong những cây hàng đầu về phong thủy. Cây kim ngân hay còn gọi là cây Tiền mang đến cho gia chủ tiền vàng... </small></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3 pad">
-                    <div class="img-thumbnail thumbnail1">
-                        <img src="Caycanh/img/anh3.png" alt="" width="100%">
-                        <div class="tintuc">
-                            <h5><strong>Cây Kim Ngân hợp với tuổi nào ?</strong></h5>
-                            <img src="Caycanh/img/icon2.png" alt=""> <small>28/06/2016</small>
-                            <p><small>Cây Kim Ngân là một trong những cây hàng đầu về phong thủy. Cây kim ngân hay còn gọi là cây Tiền mang đến cho gia chủ tiền vàng... </small></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3 pad">
-                    <div class="img-thumbnail thumbnail1">
-                        <img src="Caycanh/img/anh3.png" alt="" width="100%">
-                        <div class="tintuc">
-                            <h5><strong>Cây Kim Ngân hợp với tuổi nào ?</strong></h5>
-                            <img src="Caycanh/img/icon2.png" alt=""> <small>28/06/2016</small>
-                            <p><small>Cây Kim Ngân là một trong những cây hàng đầu về phong thủy. Cây kim ngân hay còn gọi là cây Tiền mang đến cho gia chủ tiền vàng... </small></p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
             <br>

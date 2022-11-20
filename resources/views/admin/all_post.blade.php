@@ -44,11 +44,11 @@
                         </th>
                         <th>Tên bài viết</th>
                         <th>Slug</th>
-                        <th>Thương hiệu</th>
+{{--                        <th>Thương hiệu</th>--}}
                         <th>Hình ảnh </th>
                         <th>Mô tả ngắn</th>
                         <th>Từ khoá tìm kiếm</th>
-{{--                        <th>Nội dung</th>--}}
+                        <th>Tin nổi bật</th>
                         <th>Hiển thị</th>
 
                         <th style="width:30px;"></th>
@@ -60,15 +60,15 @@
                             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->slug }}</td>
-                            <td>{{ $post->brand_name }}</td>
+{{--                            <td>{{ $post->brand_name }}</td>--}}
                             <td><img src="public/uploads/post/{{$post->image}}" height="100" width="100"></td>
                             <td>{!! $post->short_description !!}</td>
 
                             <td>{{ $post->key_word }}</td>
-
+                            <td>{{$post->hot_news == 1 ? 'Tin nổi bật' : ' '}}</td>
                             <td><span class="text-ellipsis">
               <?php
-                                    if($post->post_status==0){
+                                    if( $post->post_status==0){
                                     ?>
                 <a href="{{URL::to('/unactive-post/'.$post->id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
                 <?php
@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-sm-7 text-right text-center-xs">
                         <ul class="pagination pagination-sm m-t-none m-b-none">
-{{--                            {!!$all_product->links()!!}--}}
+                            {!! $all_post->links() !!}
                         </ul>
                     </div>
                 </div>

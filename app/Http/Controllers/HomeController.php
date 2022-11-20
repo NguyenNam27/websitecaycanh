@@ -80,6 +80,11 @@ class HomeController extends Controller
             ->whereNotIn('product_id', $arr2)
             ->orderby(DB::raw('RAND()'))
             ->paginate(8);
+
+        $blog = DB::table('tbl_posts')
+            ->where([['post_status','0']])
+            ->orderby('id','desc')
+            ->paginate(4);
     	return view('pages.home')
             ->with('category',$cate_product)
             ->with('hot_product',$hot_product)
@@ -91,6 +96,8 @@ class HomeController extends Controller
             ->with('slider',$slider)
             ->with('hot_product_big',$hot_product_big)
             ->with('hot_product_big2',$hot_product_big2)
+            ->with('blog',$blog)
+
             ->with('hot_product2',$hot_product2);
     }
     public function introduce(Request $request){
@@ -125,6 +132,15 @@ class HomeController extends Controller
             ->where('product_status','0')
             ->orderby('tbl_product.product_id','desc')
             ->paginate(16);
+        $arr_hot = [];
+
+        $hot_news = DB::table('tbl_posts')
+            ->where([['hot_news','1'],['post_status','0']])
+            ->orderby('id','desc')
+            ->get();
+        foreach ($hot_news as $hot){
+            array_push($arr_hot,$hot->id);
+        }
         return view('pages.product.all_product')
             ->with('slider',$slider)
             ->with('meta_desc',$meta_desc)
@@ -132,6 +148,7 @@ class HomeController extends Controller
             ->with('meta_title',$meta_title)
             ->with('url_canonical',$url_canonical)
             ->with('category',$cate_product)
+            ->with('hot_news',$hot_news)
             ->with('all_product',$all_product);
     }
     public function blog(Request $request ){
@@ -143,12 +160,29 @@ class HomeController extends Controller
         $meta_title = "Phụ kiện,thiết bị cho cây cảnh chính hãng";
         $url_canonical = $request->url();
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+
+        $arr_hot = [];
+
+        $hot_news = DB::table('tbl_posts')
+            ->where([['hot_news','1'],['post_status','0']])
+            ->orderby('id','desc')
+            ->get();
+        foreach ($hot_news as $hot){
+            array_push($arr_hot,$hot->id);
+        }
+        $all_blog = DB::table('tbl_posts')
+            ->where('post_status','0')
+            ->whereNotIn('id', $arr_hot)
+            ->orderby('id','desc')
+            ->paginate(5);
         return view('pages.blog.all_blog')
             ->with('slider',$slider)
             ->with('meta_desc',$meta_desc)
             ->with('meta_keywords',$meta_keywords)
             ->with('meta_title',$meta_title)
             ->with('url_canonical',$url_canonical)
+            ->with('all_blog',$all_blog)
+            ->with('hot_news',$hot_news)
             ->with('category',$cate_product);
 
     }
@@ -175,15 +209,15 @@ class HomeController extends Controller
     }
 
     public function post_detail(Request $request,$slug){
+        //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-
-        $meta_desc = "Chuyên bán những phụ kiện ,thiết bị game";
-        $meta_keywords = "thiet bi game,phu kien game,game phu kien,game giai tri";
-        $meta_title = "Phụ kiện,máy chơi game chính hãng";
+        //seo
+        $meta_desc = "Chuyên bán những cây cảnh lâu năm";
+        $meta_keywords = "thiết bị cây cảnh,phụ kiện cắt tỉa,đồ dùng nông nghiệp";
+        $meta_title = "Phụ kiện,thiết bị cho cây cảnh chính hãng";
         $url_canonical = $request->url();
-
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+
 
         $details_post = DB::table('tbl_posts')
 //                        ->join('tbl_brand','tbl_brand.brand_id','=','tbl_posts.brand_id')

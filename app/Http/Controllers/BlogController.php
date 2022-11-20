@@ -22,8 +22,8 @@ class BlogController extends Controller
     public function all_post(){
         $this->AuthLogin();
         $all_post = DB::table('tbl_posts')
-                    ->join('tbl_brand','tbl_brand.brand_id','=','tbl_posts.brand_id')
-                    ->orderBy('tbl_posts.brand_id','desc')->get();
+                    ->where('post_status','0')
+                    ->orderBy('tbl_posts.brand_id','desc')->paginate(2);
         return view('admin.all_post',[
             'all_post'=>$all_post
         ]);
@@ -58,6 +58,8 @@ class BlogController extends Controller
         $data['short_description']= $request->short_description;
         $data['content']= $request->input('content');
         $data['key_word']= $request->key_word;
+        $data['hot_news']= $request->hot_news;
+
         $data['post_status']= $request->post_status;
         $get_image = $request->file('image');
 
@@ -120,5 +122,5 @@ class BlogController extends Controller
         Session::put('message','Xóa bài viết thành công');
         return redirect()->route('allpost');
     }
-    
+
 }

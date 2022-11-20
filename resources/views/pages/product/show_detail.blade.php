@@ -6,10 +6,10 @@
         <div class="row">
             <div class="col-md-4 fotorama" data-nav="thumbs" >
 
-                <img src="https://s.fotorama.io/1.jpg" width="200px">
-                <img src="https://s.fotorama.io/2.jpg" width="200px">
-                <img src="https://s.fotorama.io/2.jpg" width="200px">
-                <img src="https://s.fotorama.io/2.jpg" width="200px">
+                <img src="{{asset('public/uploads/product/'.$details->product_image)}}" width="200px">
+{{--                <img src="https://s.fotorama.io/2.jpg" width="200px">--}}
+{{--                <img src="https://s.fotorama.io/2.jpg" width="200px">--}}
+{{--                <img src="https://s.fotorama.io/2.jpg" width="200px">--}}
 
 
             </div>
@@ -28,24 +28,42 @@
                         <p>Số lượng:</p>
                     </div>
                 </div>
+                <form action="{{URL::to('/save-cart')}}" method="post">
+                    @csrf
                 <div class="row">
+
+                        <input type="hidden" value="{{$details->product_id}}" class="cart_product_id_{{$details->product_id}}">
+
+                        <input type="hidden" value="{{$details->product_name}}" class="cart_product_name_{{$details->product_id}}">
+
+                        <input type="hidden" value="public/uploads/product/{{$details->product_image}}" class="cart_product_image_{{$details->product_id}}">
+
+                        <input type="hidden" value="{{$details->product_quantity}}" class="cart_product_quantity_{{$details->product_id}}">
+
+                        <input type="hidden" value="{{$details->product_price}}" class="cart_product_price_{{$details->product_id}}">
+
                     <div class="col-md-3 col-6">
                         <h2> {{number_format($details->product_price)}} đ</h2>
                     </div>
                     <div class="col-md-3 col-6">
-                        <input type="number" class="form-control" min="1" value="1" size="50%">
+                        <input type="number" name="qty" class="cart_product_qty_{{$details->product_id}}" min="1" value="1" size="50%">
+                        <input name="productid_hidden" type="hidden"  value="{{$details->product_id}}" />
+
                     </div>
                     <div class="col-md-3">
-
-                        <button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Đặt hàng</button>
+{{--                        <button class="btn btn-success"><i class="fa fa-shopping-cart "></i> Đặt hàng</button>--}}
+                        <input type="button" value="Thêm giỏ hàng" class="btn btn-success fa fa-shopping-cart add-to-cart" data-id_product="{{$details->product_id}}" name="add-to-cart">
                     </div>
+
+
                 </div>
+                </form>
                 <hr>
                 <p>MÔ TẢ NGẮN</p>
                 <p><small>{{strip_tags($details->product_desc)}}</small></p>
                 <hr>
-                <p>Tag:<a href="">cây bím tóc,</a><a href="">cây cảnh kim ngân,</a><a href="">giá cây kim ngân,</a><a href="">kim ngân.</a></p>
-                <br>
+{{--                <p>Tag:<a href="">cây bím tóc,</a><a href="">cây cảnh kim ngân,</a><a href="">giá cây kim ngân,</a><a href="">kim ngân.</a></p>--}}
+{{--                <br>--}}
 
                 <ul class="nav social">
                     <li class="nav-item">
@@ -67,7 +85,6 @@
 
             </div>
         </div>
-
     </section>
     <section class="clear"></section>
     <section class="container ">
