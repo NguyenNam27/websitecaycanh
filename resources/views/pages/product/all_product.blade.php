@@ -39,7 +39,7 @@
                                             <p>{{strip_tags($all->product_desc)}}</p>
                                             <div class="btn-hover">
                                                 <a href="{{URL::to('/chi-tiet/'.$all->product_slug)}}"><button class="btn btn-primary btn-sm">Chi tiêt</button></a>
-                                                <button class="btn btn-primary btn-sm">Mua ngay</button>
+                                                <button class="btn btn-primary btn-sm add-to-cart">Mua ngay</button>
                                             </div>
                                         </div>
                                     </div>

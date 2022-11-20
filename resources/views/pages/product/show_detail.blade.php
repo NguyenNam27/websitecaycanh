@@ -28,7 +28,7 @@
                         <p>Số lượng:</p>
                     </div>
                 </div>
-                <form action="{{URL::to('/save-cart')}}" method="post">
+                <form action="{{URL::to('/save-cart')}}" method="POST">
                     @csrf
                 <div class="row">
 
@@ -46,13 +46,14 @@
                         <h2> {{number_format($details->product_price)}} đ</h2>
                     </div>
                     <div class="col-md-3 col-6">
+
                         <input type="number" name="qty" class="cart_product_qty_{{$details->product_id}}" min="1" value="1" size="50%">
                         <input name="productid_hidden" type="hidden"  value="{{$details->product_id}}" />
 
                     </div>
                     <div class="col-md-3">
-{{--                        <button class="btn btn-success"><i class="fa fa-shopping-cart "></i> Đặt hàng</button>--}}
-                        <input type="button" value="Thêm giỏ hàng" class="btn btn-success fa fa-shopping-cart add-to-cart" data-id_product="{{$details->product_id}}" name="add-to-cart">
+                        <button type="submit" class="btn btn-success add-to-cart"><i class="fa fa-shopping-cart "></i> Đặt hàng</button>
+{{--                        <input type="button" value="Thêm giỏ hàng" class="btn btn-success fa fa-shopping-cart add-to-cart" data-id_product="{{$details->product_id}}" name="add-to-cart">--}}
                     </div>
 
 

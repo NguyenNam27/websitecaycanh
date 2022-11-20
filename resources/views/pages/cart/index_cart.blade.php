@@ -6,26 +6,12 @@
             <div class="col-md-3">
                 <div class="tintuc_left">
                     <p class="tieude">TIN NỔI BẬT</p>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
+                    @foreach($hot_news as $new2)
+                        <img class="tieude_img" src="{{asset('public/uploads/post/'.$new2->image)}}" alt="">
+                        <a href=""><p class="text_tintuc_left">{{$new2->title}}</p></a>
+                        <p class="sanp1"><img class="icon_tintuc" src="" alt="">{{$new2->created_at}}</p>
+                    @endforeach
+
                 </div>
             </div>
 
@@ -37,14 +23,17 @@
                         Giỏ hàng
                         <img src="Caycanh/img/icon_section1.png" alt="" class="icon-arrow">
                     </div>
+                    <?php
+                        $content = Cart::content();
+                    ?>
                 </div>
                 <div class="row tab_cart">
                     <div class="col-md-12 col-12">
                         <h3 style="margin-bottom: 30px">Giỏ hàng của bạn</h3>
-                        <table class="table table-hover" >
+
+                        <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>STT</th>
                                 <th>Tên Sản phẩm</th>
                                 <th>Hình ảnh</th>
                                 <th>Số lượng</th>
@@ -55,62 +44,30 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="tr_text">
-                                <td>1</td>
-                                <td>Cây kim tiền</td>
-                                <td><img src="Caycanh/img/tnb2.png" alt="" style="width: 100px"></td>
-                                <td><input type="number" min="1" value="3" style="width: 50px; border: none;"></td>
-                                <td>1.000.000đ</td>
-                                <td>3.000.000đ</td>
-                                <td><button type="button" class="btn btn-danger" onclick="return confirm('bạn có muốn xóa không')">Xóa</button></td>
+                            @foreach($content as $key =>$value)
+                            <tr class="tr_text_{{$value->id}}">
+                                <td>{{$value->name}}</td>
+                                <td><img src="{{asset('public/uploads/product/'.$value->options->image)}}" alt="" style="width: 100px"></td>
+                                <td>
+                                    <form action="{{URL::to('update-cart-quantity')}}" method="POST">
+                                        @csrf
+                                    <input class="cart_quantity_input" name="cart_quantity" type="text"  value="{{$value->qty}}" style="width: 50px; border: none;" >
+                                        <input type="hidden" value="{{$value->rowId}}" name="rowId_cart" class="form-control">
+                                    <input type="submit" value="Cập nhật" name="update_qty" class="btn btn-default btn-sm">
+                                    </form>
+                                </td>
+                                <td>{{number_format($value->price)}}đ</td>
+                                <td>{{number_format($value->qty*$value->price,0,",",",")}}đ</td>
+                                <td><a href="{{URL::to('/delete-to-cart/'.$value->rowId)}}"  class="btn btn-danger" >Xóa</a></td>
 
                             </tr>
-                            <tr class="tr_text">
-                                <td>2</td>
-                                <td>Cây kim tiền</td>
-                                <td><img src="Caycanh/img/tnb2.png" alt="" style="width: 100px"></td>
-                                <td><input type="number" min="1" value="3" style="width: 50px; border: none;"></td>
-                                <td>1.000.000đ</td>
-                                <td>3.000.000đ</td>
-                                <td><button type="button" class="btn btn-danger" onclick="return confirm('bạn có muốn xóa không')">Xóa</button></td>
-
-                            </tr>
-                            <tr class="tr_text">
-                                <td>3</td>
-                                <td>Cây kim tiền</td>
-                                <td><img src="Caycanh/img/tnb2.png" alt="" style="width: 100px"></td>
-                                <td><input type="number" min="1" value="3" style="width: 50px; border: none;"></td>
-                                <td>1.000.000đ</td>
-                                <td>3.000.000đ</td>
-                                <td><button type="button" class="btn btn-danger" onclick="return confirm('bạn có muốn xóa không')">Xóa</button></td>
-
-                            </tr>
-                            <tr class="tr_text">
-                                <td>4</td>
-                                <td>Cây kim tiền</td>
-                                <td><img src="Caycanh/img/tnb2.png" alt="" style="width: 100px"></td>
-                                <td><input type="number" min="1" value="3" style="width: 50px; border: none;"></td>
-                                <td>1.000.000đ</td>
-                                <td>3.000.000đ</td>
-                                <td><button type="button" class="btn btn-danger" onclick="return confirm('bạn có muốn xóa không')">Xóa</button></td>
-
-                            </tr>
-                            <tr class="tr_text">
-                                <td>5</td>
-                                <td>Cây kim tiền</td>
-                                <td><img src="Caycanh/img/tnb2.png" alt="" style="width: 100px"></td>
-                                <td><input type="number" min="1" value="3" style="width: 50px; border: none;"></td>
-                                <td>1.000.000đ</td>
-                                <td>3.000.000đ</td>
-                                <td><button type="button" class="btn btn-danger" onclick="return confirm('bạn có muốn xóa không')">Xóa</button></td>
-
-                            </tr>
+@                           @endforeach
                             </tbody>
                         </table>
                         <div style="margin-left: 620px; margin-bottom: 50px;">
-                            <p>Tổng tiền: 15.000.000đ</p>
+                            <p>Tổng tiền: {{Cart::total()}}đ</p>
                             <p>Giảm giá:0đ</p>
-                            <p>Thanh toán:15.000.000đ</p>
+                            <p>Thanh toán:{{Cart::total()}}đ</p>
                         </div>
 
                         <div>

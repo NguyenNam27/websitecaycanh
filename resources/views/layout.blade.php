@@ -218,9 +218,9 @@
     </nav>
     <div class="container footer1">
         <div class="row ">
-            <div class="col-md-3">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2166.4609806293047!2d105.74409296897059!3d21.05981484641116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134559245a2c80d%3A0x73854675d5f1a78c!2zMjUgxJDGsOG7nW5nIFBow7ogTWluaCwgVOG7lSBkw6JuIHBo4buRIFbEg24gVHLDrCwgVOG7qyBMacOqbSwgSMOgIE7hu5lpIDEwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1606185047137!5m2!1svi!2s" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-            </div>
+{{--            <div class="col-md-3">--}}
+{{--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2166.4609806293047!2d105.74409296897059!3d21.05981484641116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134559245a2c80d%3A0x73854675d5f1a78c!2zMjUgxJDGsOG7nW5nIFBow7ogTWluaCwgVOG7lSBkw6JuIHBo4buRIFbEg24gVHLDrCwgVOG7qyBMacOqbSwgSMOgIE7hu5lpIDEwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1606185047137!5m2!1svi!2s" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>--}}
+{{--            </div>--}}
             <div class="col-md-6">
                 <h5>NHÀ VƯỜN VÂN THỦY</h5>
                 <p><i class="fa fa-map-marker"></i> Địa chỉ: 25 Đường Phú Minh, Văn Trì, Minh Khai,Bắc Từ Liêm, Hà Nội</p>
@@ -253,49 +253,52 @@
 <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.9/dist/sweetalert2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.add-to-cart').click(function(){
-            var id = $(this).data('id_product');
-            // alert(id);
-            var cart_product_id = $('.cart_product_id_' + id).val();
-            var cart_product_name = $('.cart_product_name_' + id).val();
-            var cart_product_image = $('.cart_product_image_' + id).val();
-            var cart_product_quantity = $('.cart_product_quantity_' + id).val();
-            var cart_product_price = $('.cart_product_price_' + id).val();
-            var cart_product_qty = $('.cart_product_qty_' + id).val();
-            var _token = $('input[name="_token"]').val();
-            if(parseInt(cart_product_qty)>parseInt(cart_product_quantity)){
-                alert('Làm ơn đặt nhỏ hơn ' + cart_product_quantity);
-            }else{
 
-                $.ajax({
-                    url: '{{url('/add-cart-ajax')}}',
-                    method: 'POST',
-                    data:{cart_product_id:cart_product_id,
-                        cart_product_name:cart_product_name,
-                        cart_product_image:cart_product_image,
-                        cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,
-                        _token:_token,cart_product_quantity:cart_product_quantity
-                    },
-                    success:function(){
 
-                        console.log('tra ve');
-                        {{--swal({--}}
-                        {{--        title: "Đã thêm sản phẩm vào giỏ hàng",--}}
-                        {{--        text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",--}}
-                        {{--        showCancelButton: true,--}}
-                        {{--        cancelButtonText: "Xem tiếp",--}}
-                        {{--        confirmButtonClass: "btn-success",--}}
-                        {{--        confirmButtonText: "Đi đến giỏ hàng",--}}
-                        {{--        closeOnConfirm: false--}}
-                        {{--    },--}}
-                        {{--    function() {--}}
-                        {{--        window.location.href = "{{url('/gio-hang')}}";--}}
-                        {{--    });--}}
+    $('.add-to-cart').click(function(){
+        Swal.fire('Any fool can use a computer')
+        {{--    var id = $(this).data('id_product');--}}
+        {{--    // alert(id);--}}
+        {{--    var cart_product_id = $('.cart_product_id_' + id).val();--}}
+        {{--    var cart_product_name = $('.cart_product_name_' + id).val();--}}
+        {{--    var cart_product_image = $('.cart_product_image_' + id).val();--}}
+        {{--    var cart_product_quantity = $('.cart_product_quantity_' + id).val();--}}
+        {{--    var cart_product_price = $('.cart_product_price_' + id).val();--}}
+        {{--    var cart_product_qty = $('.cart_product_qty_' + id).val();--}}
+        {{--    var _token = $('input[name="_token"]').val();--}}
+        {{--    if(parseInt(cart_product_qty)>parseInt(cart_product_quantity)){--}}
+        {{--        alert('Làm ơn đặt nhỏ hơn ' + cart_product_quantity);--}}
+        {{--    }else{--}}
 
-                    }
+        {{--        $.ajax({--}}
+        {{--            url: '{{url('/add-cart-ajax')}}',--}}
+        {{--            method: 'POST',--}}
+        {{--            data:{cart_product_id:cart_product_id,--}}
+        {{--                cart_product_name:cart_product_name,--}}
+        {{--                cart_product_image:cart_product_image,--}}
+        {{--                cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,--}}
+        {{--                _token:_token,cart_product_quantity:cart_product_quantity--}}
+        {{--            },--}}
+        {{--            success:function(){--}}
 
-                });
-            }
+        {{--                // console.log('tra ve');--}}
+        {{--                swal({--}}
+        {{--                        title: "Đã thêm sản phẩm vào giỏ hàng",--}}
+        {{--                        text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",--}}
+        {{--                        showCancelButton: true,--}}
+        {{--                        cancelButtonText: "Xem tiếp",--}}
+        {{--                        confirmButtonClass: "btn-success",--}}
+        {{--                        confirmButtonText: "Đi đến giỏ hàng",--}}
+        {{--                        closeOnConfirm: false--}}
+        {{--                    },--}}
+        {{--                    function() {--}}
+        {{--                        window.location.href = "{{url('/gio-hang')}}";--}}
+        {{--                    });--}}
+
+        {{--            }--}}
+
+        {{--        });--}}
+        {{--    }--}}
 
 
         });
