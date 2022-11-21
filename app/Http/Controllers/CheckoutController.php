@@ -161,7 +161,6 @@ class CheckoutController extends Controller
     	$data['customer_phone'] = $request->customer_phone;
     	$data['customer_email'] = $request->customer_email;
     	$data['customer_password'] = md5($request->customer_password);
-
     	$customer_id = DB::table('tbl_customers')->insertGetId($data);
 
     	Session::put('customer_id',$customer_id);
@@ -182,10 +181,15 @@ class CheckoutController extends Controller
         //--seo
 
     	$cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $city = City::orderby('matp','ASC')->get();
 
-    	return view('pages.checkout.show_checkout')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('city',$city)->with('slider',$slider);
+    	return view('pages.checkout.show_checkout')
+            ->with('category',$cate_product)
+            ->with('meta_desc',$meta_desc)
+            ->with('meta_keywords',$meta_keywords)
+            ->with('meta_title',$meta_title)
+            ->with('url_canonical',$url_canonical)
+            ->with('city',$city)->with('slider',$slider);
     }
     public function save_checkout_customer(Request $request){
     	$data = array();
