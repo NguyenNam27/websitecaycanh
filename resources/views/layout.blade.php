@@ -254,51 +254,58 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-
     $('.add-to-cart').click(function(){
-        Swal.fire('Any fool can use a computer')
-        {{--    var id = $(this).data('id_product');--}}
-        {{--    // alert(id);--}}
-        {{--    var cart_product_id = $('.cart_product_id_' + id).val();--}}
-        {{--    var cart_product_name = $('.cart_product_name_' + id).val();--}}
-        {{--    var cart_product_image = $('.cart_product_image_' + id).val();--}}
-        {{--    var cart_product_quantity = $('.cart_product_quantity_' + id).val();--}}
-        {{--    var cart_product_price = $('.cart_product_price_' + id).val();--}}
-        {{--    var cart_product_qty = $('.cart_product_qty_' + id).val();--}}
-        {{--    var _token = $('input[name="_token"]').val();--}}
-        {{--    if(parseInt(cart_product_qty)>parseInt(cart_product_quantity)){--}}
-        {{--        alert('Làm ơn đặt nhỏ hơn ' + cart_product_quantity);--}}
-        {{--    }else{--}}
+        // alert('thông báo');
 
-        {{--        $.ajax({--}}
-        {{--            url: '{{url('/add-cart-ajax')}}',--}}
-        {{--            method: 'POST',--}}
-        {{--            data:{cart_product_id:cart_product_id,--}}
-        {{--                cart_product_name:cart_product_name,--}}
-        {{--                cart_product_image:cart_product_image,--}}
-        {{--                cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,--}}
-        {{--                _token:_token,cart_product_quantity:cart_product_quantity--}}
-        {{--            },--}}
-        {{--            success:function(){--}}
+            var id = $(this).data('id_product');
+            var cart_product_id = $('.cart_product_id_' + id).val();
+            var cart_product_name = $('.cart_product_name_' + id).val();
+            var cart_product_image = $('.cart_product_image_' + id).val();
+            var cart_product_quantity = $('.cart_product_quantity_' + id).val();
+            var cart_product_price = $('.cart_product_price_' + id).val();
+            var cart_product_qty = $('.cart_product_qty_' + id).val();
+            var _token = $('input[name="_token"]').val();
+            if(parseInt(cart_product_qty)>parseInt(cart_product_quantity)){
+                alert('Làm ơn đặt nhỏ hơn ' + cart_product_quantity);
+            }else{
 
-        {{--                // console.log('tra ve');--}}
-        {{--                swal({--}}
-        {{--                        title: "Đã thêm sản phẩm vào giỏ hàng",--}}
-        {{--                        text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",--}}
-        {{--                        showCancelButton: true,--}}
-        {{--                        cancelButtonText: "Xem tiếp",--}}
-        {{--                        confirmButtonClass: "btn-success",--}}
-        {{--                        confirmButtonText: "Đi đến giỏ hàng",--}}
-        {{--                        closeOnConfirm: false--}}
-        {{--                    },--}}
-        {{--                    function() {--}}
-        {{--                        window.location.href = "{{url('/gio-hang')}}";--}}
-        {{--                    });--}}
+                $.ajax({
+                    url: '{{url('/add-cart-ajax')}}',
+                    method: 'POST',
+                    data:{cart_product_id:cart_product_id,
+                        cart_product_name:cart_product_name,
+                        cart_product_image:cart_product_image,
+                        cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,
+                        _token:_token,
+                        cart_product_quantity:cart_product_quantity
+                    },
+                    success:function(data){
+                        alert(data);
+                        // Swal.fire({
+                        //     title: 'Are you sure?',
+                        //     text: "You won't be able to revert this!",
+                        //     icon: 'warning',
+                        //     showCancelButton: true,
+                        //     confirmButtonColor: '#3085d6',
+                        //     cancelButtonColor: '#d33',
+                        //     confirmButtonText: 'Yes, delete it!'
+                        // }).then((result) => {
+                        //     if (result.isConfirmed) {
+                        //         Swal.fire(
+                        //             'Deleted!',
+                        //             'Your file has been deleted.',
+                        //             'success'
+                        //         )
+                        //     }
+                        // }),
+                            {{--function() {--}}
+                            {{--    window.location.href = "{{url('/gio-hang')}}";--}}
+                            {{--};--}}
 
-        {{--            }--}}
+                    }
 
-        {{--        });--}}
-        {{--    }--}}
+                });
+            }
 
 
         });

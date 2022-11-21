@@ -193,7 +193,6 @@ class CartController extends Controller
         $data['options']['image'] = $product_info->product_image;
         Cart::add($data);
         return Redirect::to('/show-cart');
-//     Cart::destroy();
 
     }
     public function show_cart(Request $request){

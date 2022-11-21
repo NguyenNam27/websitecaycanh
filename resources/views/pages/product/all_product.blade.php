@@ -9,7 +9,7 @@
                     @foreach($hot_news as $new2)
                         <img class="tieude_img" src="{{asset('public/uploads/post/'.$new2->image)}}" alt="">
                         <a href=""><p class="text_tintuc_left">{{$new2->title}}</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">{{$new2->created_at}}</p>
+                        <p class="sanp1"><img class="icon_tintuc" src="" alt="">{{$new2->created_at}}</p>
                     @endforeach
 
                 </div>
@@ -22,7 +22,7 @@
                         <div class="col-md-4 col-8 title-product1">
                             <img src="Caycanh/img/icon1.png" alt="">
                             Tất cả sản phẩm
-                            <img src="Caycanh/img/icon_section1.png" alt="" class="icon-arrow">
+                            <img src="" alt="" class="icon-arrow">
                         </div>
                         <div class="col-md-8">
 
@@ -31,15 +31,25 @@
                     <div class="row sanpham">
                         @foreach($all_product as $all)
                         <div class="col-6 col-sm-6 col-md-3 pad cp_sanpham">
+                            <form >
+                                @csrf
+                                <input type="hidden" value="{{$all->product_id}}" class="cart_product_id_{{$all->product_id}}">
+                                <input type="hidden" value="{{$all->product_name}}" class="cart_product_name_{{$all->product_id}}">
+
+                                <input type="hidden" value="{{$all->product_quantity}}" class="cart_product_quantity_{{$all->product_id}}">
+
+                                <input type="hidden" value="public/uploads/product/{{$all->product_image}}" class="cart_product_image_{{$all->product_id}}">
+                                <input type="hidden" value="{{$all->product_price}}" class="cart_product_price_{{$all->product_id}}">
+                                <input type="hidden" value="1" class="cart_product_qty_{{$all->product_id}}">
                             <div class="img-thumbnail">
-                                <a href="sanphamchitiet.html">
+                                <a href="{{URL::to('/chi-tiet/'.$all->product_slug)}}">
                                     <div class=" hover-img">
                                         <img src="{{asset('public/uploads/product/'.$all->product_image)}}" alt="" width="100%" class="image">
                                         <div class="middle">
                                             <p>{{strip_tags($all->product_desc)}}</p>
                                             <div class="btn-hover">
                                                 <a href="{{URL::to('/chi-tiet/'.$all->product_slug)}}"><button class="btn btn-primary btn-sm">Chi tiêt</button></a>
-                                                <button class="btn btn-primary btn-sm add-to-cart">Mua ngay</button>
+                                                <button class="btn btn-primary btn-sm add-to-cart" data-id_product="{{$all->product_id}}" >Mua ngay</button>
                                             </div>
                                         </div>
                                     </div>
@@ -49,6 +59,7 @@
                                     </div>
                                 </a>
                             </div>
+                            </form>
                         </div>
                         @endforeach
 

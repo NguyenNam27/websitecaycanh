@@ -31,7 +31,7 @@
                     @foreach($hot_product as $hot)
                     <div class="col-6 col-sm-6 col-md-3 pad">
                         <div class="img-thumbnail">
-                            <a href="sanphamchitiet.html">
+                            <a href="{{URL::to('/chi-tiet/'.$hot->product_slug)}}">
                                 <div class=" hover-img">
                                     <img src="{{asset('public/uploads/product/'.$hot->product_image)}}" alt="" width="100%" class="image">
                                     <div class="middle">
@@ -86,14 +86,24 @@
                     @foreach($hot_product2 as $pro2)
                     <div class="col-6 col-sm-6 col-md-3 pad">
                         <div class="img-thumbnail">
-                            <a href="sanphamchitiet.html">
+                            <form action="">
+                                @csrf
+                                <input type="hidden" value="{{$pro2->product_id}}" class="cart_product_id_{{$pro2->product_id}}">
+                                <input type="hidden" value="{{$pro2->product_name}}" class="cart_product_name_{{$pro2->product_id}}">
+
+                                <input type="hidden" value="{{$pro2->product_quantity}}" class="cart_product_quantity_{{$pro2->product_id}}">
+
+                                <input type="hidden" value="public/uploads/product/{{$pro2->product_image}}" class="cart_product_image_{{$pro2->product_id}}">
+                                <input type="hidden" value="{{$pro2->product_price}}" class="cart_product_price_{{$pro2->product_id}}">
+                                <input type="hidden" value="1" class="cart_product_qty_{{$pro2->product_id}}">
+                            <a href="{{URL::to('/chi-tiet/'.$pro2->product_slug)}}">
                                 <div class=" hover-img">
                                     <img src="{{asset('public/uploads/product/'.$pro2->product_image)}}" alt="" width="100%" class="image">
                                     <div class="middle">
                                         <p>{{strip_tags($pro2->product_desc)}}</p>
                                         <div class="btn-hover">
                                             <a href="{{URL::to('/chi-tiet/'.$pro2->product_slug)}}"><button class="btn btn-primary btn-sm">Chi tiêt</button></a>
-                                            <button class="btn btn-primary btn-sm">Mua ngay</button>
+                                            <button class="btn btn-primary btn-sm add-to-cart" >Mua ngay</button>
                                         </div>
                                     </div>
                                 </div>
@@ -102,6 +112,7 @@
                                     <p class="price">{{number_format($pro2->product_price)}} vnđ</p>
                                 </div>
                             </a>
+                            </form>
                         </div>
                     </div>
                     @endforeach
@@ -130,7 +141,7 @@
             </div>
             <br>
             <div class="text-center">
-                <button type="button" class="btn btn-light">Xem thêm <i class="fa fa-caret-right caret1"></i></button>
+                <button type="button" class="btn btn-light ">Xem thêm <i class="fa fa-caret-right caret1"></i></button>
             </div>
         </div>
     </section>
