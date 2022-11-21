@@ -135,7 +135,7 @@ Route::post('/insert-coupon-code', [CouponController::class, 'insert_coupon_code
 //Cart
 Route::post('/update-cart-quantity', [CartController::class, 'update_cart_quantity']);
 Route::post('/update-cart', [CartController::class, 'update_cart']);
-Route::post('/save-cart', [CartController::class, 'save_cart']);
+Route::post('/save-cart', [CartController::class, 'save_cartsave_cart']);
 Route::post('/add-cart-ajax', [CartController::class, 'add_cart_ajax']);
 Route::get('/show-cart', [CartController::class, 'show_cart']);
 Route::get('/gio-hang', [CartController::class, 'gio_hang']);

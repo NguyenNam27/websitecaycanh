@@ -30,8 +30,9 @@
                     </div>
                     <div class="row sanpham">
                         @foreach($all_product as $all)
+{{--                            {{dd($all)}}--}}
                         <div class="col-6 col-sm-6 col-md-3 pad cp_sanpham">
-                            <form >
+                            <form action="{{URL::to('/save-cart')}}" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{$all->product_id}}" class="cart_product_id_{{$all->product_id}}">
                                 <input type="hidden" value="{{$all->product_name}}" class="cart_product_name_{{$all->product_id}}">
@@ -47,9 +48,10 @@
                                         <img src="{{asset('public/uploads/product/'.$all->product_image)}}" alt="" width="100%" class="image">
                                         <div class="middle">
                                             <p>{{strip_tags($all->product_desc)}}</p>
+
                                             <div class="btn-hover">
-                                                <a href="{{URL::to('/chi-tiet/'.$all->product_slug)}}"><button class="btn btn-primary btn-sm">Chi tiêt</button></a>
-                                                <button class="btn btn-primary btn-sm add-to-cart" data-id_product="{{$all->product_id}}" >Mua ngay</button>
+                                                <a href="{{URL::to('/chi-tiet/'.$all->product_slug)}}"><p class="btn btn-primary btn-sm">Chi tiêt</p></a>
+                                                <button type="submit" class="btn btn-primary btn-sm add-to-cart" >Mua ngay</button>
                                             </div>
                                         </div>
                                     </div>

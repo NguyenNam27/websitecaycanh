@@ -34,7 +34,7 @@ class CartController extends Controller
         foreach ($hot_news as $hot){
             array_push($arr_hot,$hot->id);
         }
-        return view('pages.cart.index_cart')
+        return view('pages.cart.cart_ajax')
             ->with('slider',$slider)
             ->with('meta_desc',$meta_desc)
             ->with('meta_keywords',$meta_keywords)
@@ -83,6 +83,7 @@ class CartController extends Controller
     public function add_cart_ajax(Request $request){
         // Session::forget('cart');
         $data = $request->all();
+//        print_r($data);
         $session_id = substr(md5(microtime()),rand(0,26),5);
         $cart = Session::get('cart');
         if($cart==true){
@@ -183,6 +184,7 @@ class CartController extends Controller
         $productId = $request->productid_hidden;
         $quantity = $request->qty;
         $product_info = DB::table('tbl_product')->where('product_id',$productId)->first();
+
         // Cart::add('293ad', 'Product 1', 1, 9.99, 550);
         // Cart::destroy();
         $data['id'] = $product_info->product_id;
@@ -196,6 +198,7 @@ class CartController extends Controller
 
     }
     public function show_cart(Request $request){
+
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
 
         //seo

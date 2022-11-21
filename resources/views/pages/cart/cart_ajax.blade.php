@@ -1,6 +1,7 @@
 @extends('layout')
 @section('content')
     <section class="clear"></section>
+    @if(Session::get('cart')==true)
     <section class="container">
         <div class="row">
             <div class="col-md-3">
@@ -23,14 +24,22 @@
                         Giỏ hàng
                         <img src="Caycanh/img/icon_section1.png" alt="" class="icon-arrow">
                     </div>
-                    <?php
-                    $content = Cart::content();
-                    ?>
+
                 </div>
                 <div class="row tab_cart">
                     <div class="col-md-12 col-12">
                         <h3 style="margin-bottom: 30px">Giỏ hàng của bạn</h3>
-
+                        @if(session()->has('message'))
+                            <div class="alert alert-success">
+                                {!! session()->get('message') !!}
+                            </div>
+                        @elseif(session()->has('error'))
+                            <div class="alert alert-danger">
+                                {!! session()->get('error') !!}
+                            </div>
+                        @endif
+                        <form action="{{url('/update-cart')}}" method="POST">
+                            @csrf
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -44,80 +53,111 @@
                             </tr>
                             </thead>
                             <tbody>
-{{--                            @foreach($content as $key =>$value)--}}
-{{--                                <tr class="tr_text_{{$value->id}}">--}}
-{{--                                    <td>{{$value->name}}</td>--}}
-{{--                                    <td><img src="{{asset('public/uploads/product/'.$value->options->image)}}" alt="" style="width: 100px"></td>--}}
-{{--                                    <td>--}}
-{{--                                        <form action="{{URL::to('update-cart-quantity')}}" method="POST">--}}
-{{--                                            @csrf--}}
-{{--                                            <input class="cart_quantity_input" name="cart_quantity" type="text"  value="{{$value->qty}}" style="width: 50px; border: none;" >--}}
-{{--                                            <input type="hidden" value="{{$value->rowId}}" name="rowId_cart" class="form-control">--}}
-{{--                                            <input type="submit" value="Cập nhật" name="update_qty" class="btn btn-default btn-sm">--}}
-{{--                                        </form>--}}
-{{--                                    </td>--}}
-{{--                                    <td>{{number_format($value->price)}}đ</td>--}}
-{{--                                    <td>{{number_format($value->qty*$value->price,0,",",",")}}đ</td>--}}
-{{--                                    <td><a href="{{URL::to('/delete-to-cart/'.$value->rowId)}}"  class="btn btn-danger" >Xóa</a></td>--}}
 
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
-{{--                            @php--}}
-{{--                            print_r(Session::get('cart'))--}}
-{{--                            @endphp--}}
+                                @php
+                                    $total = 0;
+                                @endphp
+                            @foreach(Session::get('cart') as $key =>$cart)
+                                    @php
+                                        $subtotal = $cart['product_price']*$cart['product_qty'];
+                                        $total+=$subtotal;
+                                    @endphp
+
+                                <tr class="tr_text">
+                                    <td>{{$cart['product_name']}}</td>
+                                    <td><img src="{{asset($cart['product_image'])}}" alt="" style="width: 100px"></td>
+                                    <td>
+
+                                            <input class="cart_quantity_input" name="cart_qty[{{$cart['session_id']}}]" type="text"  value="{{$cart['product_qty']}}" style="width: 50px; border: none;" >
+
+                                    <input type="submit" value="Cập nhật " name="update_qty" class="check_out btn btn-default btn-sm">
+
+                                    </td>
+                                    <td>{{number_format($cart['product_price'],0,',','.')}}đ</td>
+                                    <td>{{number_format( $cart['product_price']*$cart['product_qty']) }}đ</td>
+                                    <td><a href="{{url('/del-product/'.$cart['session_id'])}}"  class="btn btn-danger" >Xóa</a></td>
+
+                                </tr>
+                            @endforeach
+
+
                             </tbody>
                         </table>
-                        <div style="margin-left: 620px; margin-bottom: 50px;">
-                            <p>Tổng tiền: đ</p>
-                            <p>Giảm giá:0đ</p>
-                            <p>Thanh toán:ttđ</p>
-                        </div>
 
-                        <div>
-                            <h3 style="margin-bottom: 50px">THÔNG TIN KHÁCH HÀNG</h3>
-                            <form>
-                                <div class="form-group row">
-                                    <label for="name" class="col-sm-2 form-control-label">Họ tên</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="name" placeholder="Nhập đầy đủ họ tên..." required="">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="inputEmail3" class="col-sm-2 form-control-label">Email</label>
-                                    <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="phone" class="col-sm-2 form-control-label">Điện thoại</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" class="form-control" id="phone" placeholder="0945028297">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="address" class="col-sm-2 form-control-label">Địa chỉ</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="address" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="status" class="col-sm-2 form-control-label">Ghi chú</label>
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control"  id="status"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-primary btn_cart">Đặt hàng</button>
-                                    </div>
-                                </div>
-                            </form>
+                        <div style="margin-left: 620px; margin-bottom: 50px;">
+                            <p>Tổng tiền: {{number_format($total,0,',','.')}}</p>
+                            <p>Giảm giá:0đ</p>
+                            <p>Thanh toán:{{number_format($total,0,',','.')}}đ</p>
                         </div>
+                            <div class="form-group row">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    @if(Session::get('customer_id'))
+                                        {{dd(Session::get('customer_id'))}}
+                                        <a class="btn btn-primary btn_cart" href="{{url('/checkout')}}">Đặt hàng</a>
+                                    @else
+                                        <a class="btn btn-primary btn_cart" href="{{url('/dang-nhap')}}">Đặt hàng</a>
+                                    @endif
+{{--                                    <a href=""  class="btn btn-primary btn_cart">Đặt hàng</a>--}}
+                                </div>
+                            </div>
+
+
+                        </form>
+
+{{--                        <div>--}}
+{{--                            <h3 style="margin-bottom: 50px">THÔNG TIN KHÁCH HÀNG</h3>--}}
+{{--                            <form>--}}
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="name" class="col-sm-2 form-control-label">Họ tên</label>--}}
+{{--                                    <div class="col-sm-10">--}}
+{{--                                        <input type="text" class="form-control" id="name" placeholder="Nhập đầy đủ họ tên..." required="">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="inputEmail3" class="col-sm-2 form-control-label">Email</label>--}}
+{{--                                    <div class="col-sm-10">--}}
+{{--                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="phone" class="col-sm-2 form-control-label">Điện thoại</label>--}}
+{{--                                    <div class="col-sm-10">--}}
+{{--                                        <input type="number" class="form-control" id="phone" placeholder="0945028297">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="address" class="col-sm-2 form-control-label">Địa chỉ</label>--}}
+{{--                                    <div class="col-sm-10">--}}
+{{--                                        <input type="text" class="form-control" id="address" placeholder="">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="status" class="col-sm-2 form-control-label">Ghi chú</label>--}}
+{{--                                    <div class="col-sm-10">--}}
+{{--                                        <textarea class="form-control"  id="status"></textarea>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group row">--}}
+{{--                                    <div class="col-sm-offset-2 col-sm-10">--}}
+{{--                                        <button type="submit" class="btn btn-primary btn_cart">Đặt hàng</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
 
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @else
+        <tr>
+            <td colspan="5"><center>
+                    @php
+                        echo 'Chưa có sản phẩm trong giỏ hàng';
+                    @endphp
+                </center></td>
+        </tr>
+    @endif
 @endsection
 

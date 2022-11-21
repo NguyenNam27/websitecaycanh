@@ -31,17 +31,33 @@
                     @foreach($hot_product as $hot)
                     <div class="col-6 col-sm-6 col-md-3 pad">
                         <div class="img-thumbnail">
-                            <a href="{{URL::to('/chi-tiet/'.$hot->product_slug)}}">
+
+
                                 <div class=" hover-img">
+                                    <form>
+                                        @csrf
+                                        <input type="hidden" value="{{$hot->product_id}}" class="cart_product_id_{{$hot->product_id}}">
+                                        <input type="hidden" value="{{$hot->product_name}}" class="cart_product_name_{{$hot->product_id}}">
+
+                                        <input type="hidden" value="{{$hot->product_quantity}}" class="cart_product_quantity_{{$hot->product_id}}">
+
+                                        <input type="hidden" value="public/uploads/product/{{$hot->product_image}}" class="cart_product_image_{{$hot->product_id}}">
+                                        <input type="hidden" value="{{$hot->product_price}}" class="cart_product_price_{{$hot->product_id}}">
+                                        <input type="hidden" value="1" class="cart_product_qty_{{$hot->product_id}}">
+                                        <a href="{{URL::to('/chi-tiet/'.$hot->product_slug)}}"></a>
                                     <img src="{{asset('public/uploads/product/'.$hot->product_image)}}" alt="" width="100%" class="image">
                                     <div class="middle">
                                         <p>{{strip_tags($hot->product_desc)}}</p>
                                         <div class="btn-hover">
-                                            <a href="{{URL::to('/chi-tiet/'.$hot->product_slug)}}"><button class="btn btn-primary btn-sm">Chi tiêt</button></a>
-                                            <button class="btn btn-primary btn-sm">Mua ngay</button>
+                                            <a href="{{URL::to('/chi-tiet/'.$hot->product_slug)}}"><p class="btn btn-primary btn-sm">Chi tiêt</p></a>
+                                            <button type="button" class="btn btn-primary btn-sm add-to-cart " data-id_product="{{$hot->product_id}}">Mua ngay</button>
                                         </div>
                                     </div>
+
+                                    </form>
                                 </div>
+
+
                                 <div class="text-center">
                                     <h5>{{$hot->product_name}} </h5>
                                     <p class="price">{{number_format($hot->product_price)}} vnđ</p>
