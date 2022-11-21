@@ -255,7 +255,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.9/dist/sweetalert2.min.js"></script>
 <script src="Caycanh/js/sweetalert.min.js"></script>
-<script src="Caycanh/js/login.js" ></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -309,5 +308,7 @@
         });
     });
 </script>
+{{--<script src="Caycanh/js/login.js" ></script>--}}
+
 </body>
 </html>
