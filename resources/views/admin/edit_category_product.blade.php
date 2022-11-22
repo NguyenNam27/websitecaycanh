@@ -16,7 +16,7 @@
                         <div class="panel-body">
                             @foreach($edit_category_product as $key => $edit_value)
                             <div class="position-center">
-                                <form role="form" action="{{URL::to('/update-category-product/'.$edit_value->category_id)}}" method="post">
+                                <form role="form" action="{{URL::to('/update-category-product/'.$edit_value->category_id)}}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên danh mục</label>
@@ -26,6 +26,11 @@
                                     <label for="exampleInputEmail1">Slug</label>
                                     <input type="text" value="{{$edit_value->slug_category_product}}" name="slug_category_product" class="form-control" id="convert_slug" >
                                 </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
+                                        <input type="file" name="category_image" class="form-control" id="exampleInputEmail1">
+                                        <img src="{{URL::to('public/uploads/category/'.$edit_value->category_image)}}" height="100" width="100">
+                                    </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mô tả danh mục</label>
                                     <textarea style="resize: none" rows="8" class="form-control" name="category_product_desc" id="exampleInputPassword1" >{{$edit_value->category_desc}}</textarea>

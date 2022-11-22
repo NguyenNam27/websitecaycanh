@@ -36,8 +36,8 @@
     padding: 15px;
     color: #ffffff;
     font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
+    -webkit-transition: all 0.5 ease;
+    transition: all 0.5 ease;
     cursor: pointer;
 }
 .form button:hover,
@@ -54,15 +54,7 @@
     color: #4caf50;
     text-decoration: none;
 }
-/*.form .register-form {*/
-/*    display: none;*/
-/*}*/
-/*.container {*/
-/*    position: relative;*/
-/*    z-index: 1;*/
-/*    max-width: 300px;*/
-/*    margin: 0 auto;*/
-/*}*/
+
 .container:before,
 .container:after {
     content: "";
@@ -91,15 +83,15 @@
 .container .info span .fa {
     color: #ef3b3a;
 }
-/*body {*/
-/*    background: #76b852; !* fallback for old browsers *!*/
-/*    background: rgb(141, 194, 111);*/
-/*    background: linear-gradient(*/
-/*        90deg,*/
-/*        rgba(141, 194, 111, 1) 0%,*/
-/*        rgba(118, 184, 82, 1) 50%*/
-/*    );*/
-/*    font-family: "Roboto", sans-serif;*/
-/*    -webkit-font-smoothing: antialiased;*/
-/*    -moz-osx-font-smoothing: grayscale;*/
-/*}*/
+body {
+    /*background: #76b852; !* fallback for old browsers *!*/
+    /*background: rgb(141, 194, 111);*/
+    /*background: linear-gradient(*/
+    /*    90deg,*/
+    /*    rgba(141, 194, 111, 1) 0%,*/
+    /*    rgba(118, 184, 82, 1) 50%*/
+    /*);*/
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

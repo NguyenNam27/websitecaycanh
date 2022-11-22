@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.9/dist/sweetalert2.min.css">
     <link href="Caycanh/css/sweetalert.css" rel="stylesheet">
 
-
+{{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
     <link rel="stylesheet" href="Caycanh/css/style.css">
 
 
@@ -39,10 +39,26 @@
                         <span>Hotline:</span>
                         <span class="phone1">0395.139.875</span>
                     </a></li>
-                <li><a href="" title="Facebook"><img src="Caycanh/img/f.png" alt="Facebook"></a></li>
-                <li><a href="" title="Twitter"><img src="Caycanh/img/t.png" alt="Twitter"></a></li>
-                <li><a href="" title="Google"><img src="Caycanh/img/g+.png" alt="Google"></a></li>
-                <li><a href="" title="Youtube"><img src="Caycanh/img/y.png" alt="Youtube"></a></li>
+{{--                <li><a href="" title="Facebook"><img src="Caycanh/img/f.png" alt="Facebook"></a></li>--}}
+{{--                <li><a href="" title="Twitter"><img src="Caycanh/img/t.png" alt="Twitter"></a></li>--}}
+
+                <?php
+                $customer_id = Session::get('customer_id');
+                if($customer_id!=NULL){
+                ?>
+                <li><a  href="" ><img src="" > Tên </a></li>
+                <li><a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
+
+                <?php
+                }else{
+                ?>
+                <li><a  href="{{URL::to('/dang-nhap')}}" title="Đăng nhập"><img src="" alt="Đăng nhập"></a></li>
+                <li><a href="{{URL::to('/dang-ky')}}" title="Đăng ký"><img src="" alt="Đăng ký"></a></li>
+                <?php
+                }
+                ?>
+
+
             </ul>
         </div>
     </div>
@@ -308,7 +324,6 @@
         });
     });
 </script>
-{{--<script src="Caycanh/js/login.js" ></script>--}}
-
+@yield('myjs'                                                                                                                              )
 </body>
 </html>

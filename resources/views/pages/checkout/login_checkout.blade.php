@@ -3,32 +3,33 @@
     <link rel="stylesheet" href="Caycanh/css/login.css">
 
     <div class="login-page">
-        <div class="form">
-            <h2>Sign In</h2>
-            <form action="{{URL::to('/add-customer')}}" method="POST" class="register-form">
-                @csrf
-                <input type="text" name="customer_name" placeholder="Họ và tên"/>
-                <input type="text" name="customer_email" placeholder="Địa chỉ email"/>
-                <input type="password" name="customer_password" placeholder="Mật khẩu"/>
-                <input type="text" name="customer_phone" placeholder="Phone"/>
-                <button type="submit">create</button>
-            </form>
-        </div>
+
+
         <div class="form">
             <h2>Login</h2>
-            <form action="{{URL::to('/login-customer')}}" method="POST" class="login-form">
-                @csrf
-                <input type="text" e="email_account" placeholder="Tài khoản" />
+            <form action="{{URL::to('/login-customer')}}" method="POST" class="login-form" enctype="multipart/form-data">
+                {{csrf_field()}}
+                <input type="text" name="email_account" placeholder="Tài khoản" />
                 <input type="password" name="password_account" placeholder="Password" />
-                <span>
-								<input type="checkbox" class="checkbox">
+
+                <input type="checkbox" class="checkbox" >
 								Ghi nhớ đăng nhập
-							</span>
+
                 <button type="submit">login</button>
-                <p class="message">Not registered? <a href="#">Create an account</a></p>
+                <p class="message">Tạo tài khoản <a href="{{URL::to('dang-ky')}}">Đăng ký</a></p>
             </form>
         </div>
     </div>
 
 
+
+
+@endsection
+@section('myjs')
+    <script>
+        $('.message a').click(function(){
+            $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+        });
+
+    </script>
 @endsection

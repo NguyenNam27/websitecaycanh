@@ -131,8 +131,29 @@ class CheckoutController extends Controller
         return view('admin_layout')->with('admin.view_order', $manager_order_by_id);
 
     }
+    public function register_checkout(Request $request){
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+
+        //seo
+        $meta_desc = "Đăng nhập thanh toán";
+        $meta_keywords = "Đăng nhập thanh toán";
+        $meta_title = "Đăng nhập thanh toán";
+        $url_canonical = $request->url();
+        //--seo
+
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+
+        return view('pages.checkout.register_checkout')
+            ->with('category',$cate_product)
+            ->with('brand',$brand_product)
+            ->with('meta_desc',$meta_desc)
+            ->with('meta_keywords',$meta_keywords)
+            ->with('meta_title',$meta_title)
+            ->with('url_canonical',$url_canonical)
+            ->with('slider',$slider);
+    }
     public function login_checkout(Request $request){
-         //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
 
         //seo
@@ -181,15 +202,21 @@ class CheckoutController extends Controller
         //--seo
 
     	$cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $city = City::orderby('matp','ASC')->get();
-
+//        $city = City::orderby('matp','ASC')->get();
+        $hot_news = DB::table('tbl_posts')
+            ->where([['hot_news','1'],['post_status','0']])
+            ->orderby('id','desc')
+            ->get();
     	return view('pages.checkout.show_checkout')
             ->with('category',$cate_product)
             ->with('meta_desc',$meta_desc)
             ->with('meta_keywords',$meta_keywords)
             ->with('meta_title',$meta_title)
             ->with('url_canonical',$url_canonical)
-            ->with('city',$city)->with('slider',$slider);
+//            ->with('city',$city)
+            ->with('hot_news',$hot_news)
+
+            ->with('slider',$slider);
     }
     public function save_checkout_customer(Request $request){
     	$data = array();
@@ -274,11 +301,11 @@ class CheckoutController extends Controller
     public function login_customer(Request $request){
     	$email = $request->email_account;
     	$password = md5($request->password_account);
-    	$result = DB::table('tbl_customers')->where('customer_email',$email)->where('customer_password',$password)->first();
 
-
+        $result = DB::table('tbl_customers')
+            ->where([['customer_email',$email],['customer_password',$password]])
+            ->first();
     	if($result){
-
     		Session::put('customer_id',$result->customer_id);
     		return Redirect::to('/checkout');
     	}else{

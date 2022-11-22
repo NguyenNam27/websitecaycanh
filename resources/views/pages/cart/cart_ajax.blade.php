@@ -85,14 +85,13 @@
                         </table>
 
                         <div style="margin-left: 620px; margin-bottom: 50px;">
-                            <p>Tổng tiền: {{number_format($total,0,',','.')}}</p>
+                            <p>Tổng tiền: {{number_format($total,0,',','.')}}đ</p>
                             <p>Giảm giá:0đ</p>
                             <p>Thanh toán:{{number_format($total,0,',','.')}}đ</p>
                         </div>
                             <div class="form-group row">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     @if(Session::get('customer_id'))
-                                        {{dd(Session::get('customer_id'))}}
                                         <a class="btn btn-primary btn_cart" href="{{url('/checkout')}}">Đặt hàng</a>
                                     @else
                                         <a class="btn btn-primary btn_cart" href="{{url('/dang-nhap')}}">Đặt hàng</a>

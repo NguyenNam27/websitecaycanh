@@ -46,6 +46,19 @@ class CategoryProduct extends Controller
     	$data['category_desc'] = $request->category_product_desc;
     	$data['category_status'] = $request->category_product_status;
 
+        $get_image = $request->file('category_image');
+
+        if($get_image){
+            $get_name_image = $get_image->getClientOriginalName();//lấy tên file ảnh
+            $name_image = current(explode('.',$get_name_image));//lấy tên ảnh
+            $new_image =  $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();//lấy tên ảnh mới
+            $get_image->move('public/uploads/category',$new_image);//chuyển hình ảnh vào thư mục với đường dẫn
+            $data['category_image'] = $new_image;
+
+             DB::table('tbl_category_product')->insert($data);
+            Session::put('message','Thêm danh mục sản phẩm thành công');
+            return Redirect::to('/add-category-product');
+        }
     	DB::table('tbl_category_product')->insert($data);
     	Session::put('message','Thêm danh mục sản phẩm thành công');
     	return Redirect::to('all-category-product');
@@ -71,14 +84,26 @@ class CategoryProduct extends Controller
 
         return view('admin_layout')->with('admin.edit_category_product', $manager_category_product);
     }
-    public function update_category_product(Request $request,$category_product_id){
+    public function update_category_product(Request $request,$category_id){
         $this->AuthLogin();
         $data = array();
         $data['category_name'] = $request->category_product_name;
         $data['meta_keywords'] = $request->category_product_keywords;
         $data['slug_category_product'] = $request->slug_category_product;
         $data['category_desc'] = $request->category_product_desc;
-        DB::table('tbl_category_product')->where('category_id',$category_product_id)->update($data);
+        $get_image = $request->file('category_image');
+
+        if($get_image){
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.',$get_name_image));
+            $new_image =  $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/uploads/category',$new_image);
+            $data['category_image'] = $new_image;
+            DB::table('tbl_category_product')->where('category_id',$category_id)->update($data);
+            Session::put('message','Cập nhật danh mục sản phẩm thành công');
+            return Redirect::to('all-category-product');
+        }
+        DB::table('tbl_category_product')->where('category_id',$category_id)->update($data);
         Session::put('message','Cập nhật danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
     }

@@ -33,7 +33,6 @@ class ProductController extends Controller
         $this->AuthLogin();
     	$all_product = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
-        ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
         ->orderby('tbl_product.product_id','desc')->paginate(5);
     	$manager_product  = view('admin.all_product')->with('all_product',$all_product);
     	return view('admin_layout')->with('admin.all_product', $manager_product);
@@ -49,9 +48,9 @@ class ProductController extends Controller
     	$data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
-        $data['brand_id'] = $request->product_brand;
+        $data['product_hot'] = $request->product_hot;
+
         $data['product_status'] = $request->product_status;
-        $data['product_image'] = $request->product_status;
         $get_image = $request->file('product_image');
 
         if($get_image){
@@ -103,7 +102,7 @@ class ProductController extends Controller
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
-        $data['brand_id'] = $request->product_brand;
+        $data['product_hot'] = $request->product_hot;
         $data['product_status'] = $request->product_status;
         $get_image = $request->file('product_image');
 
@@ -117,8 +116,8 @@ class ProductController extends Controller
                     Session::put('message','Cập nhật sản phẩm thành công');
                     return Redirect::to('all-product');
         }
-
         DB::table('tbl_product')->where('product_id',$product_id)->update($data);
+
         Session::put('message','Cập nhật sản phẩm thành công');
         return Redirect::to('all-product');
     }

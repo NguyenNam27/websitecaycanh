@@ -61,7 +61,7 @@
             <td>{{ $pro->product_quantity }}</td>
             <td>{{ $pro->product_slug }}</td>
             <td>{{ number_format($pro->product_price,0,',','.') }}đ</td>
-            <td><img src="public/uploads/product/{{ $pro->product_image }}" height="100" width="100"></td>
+            <td><img src="{{asset('public/uploads/product/'.$pro->product_image)  }}" height="100" width="100"></td>
             <td>{{ $pro->category_name }}</td>
             <td>{{ $pro->product_hot }}</td>
 

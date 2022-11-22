@@ -55,15 +55,15 @@
 
                                     </select>
                                 </div>
-                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Thương hiệu</label>
-                                      <select name="product_brand" class="form-control input-sm m-bot15">
-                                        @foreach($brand_product as $key => $brand)
-                                            <option value="{{$brand->brand_id}}">{{$brand->brand_name}}</option>
-                                        @endforeach
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Sản phẩm nổi bật </label>
+                                        <select class="form-control" name="product_hot">
+                                            <option value="">--Chon--</option>
+                                            <option value="1">Sản phẩm nổi bật</option>
+                                            <option value="0">Không</option>
+                                        </select>
 
-                                    </select>
-                                </div>
+                                    </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Hiển thị</label>
                                       <select name="product_status" class="form-control input-sm m-bot15">

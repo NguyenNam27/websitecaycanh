@@ -61,7 +61,7 @@
                                     <td><a href="{{URL::to('/delete-to-cart/'.$value->rowId)}}"  class="btn btn-danger" >Xóa</a></td>
 
                                 </tr>
-                                @                           @endforeach
+                            @endforeach
                             </tbody>
                         </table>
                         <div style="margin-left: 620px; margin-bottom: 50px;">

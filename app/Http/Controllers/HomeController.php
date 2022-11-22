@@ -45,42 +45,30 @@ class HomeController extends Controller
         $url_canonical = $request->url();
         //--seo
     	$cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-
         // SẢN PHẨM BÁN CHẠY
-        $arr = [];
-        $hot_product_big = DB::table('tbl_product')
-            ->where([['product_hot','1'],['product_status','0']])
+        $hot_product_big = DB::table('tbl_category_product')
+            ->where([['category_id','19'],['category_status','0']])
             ->orderby(DB::raw('RAND()'))
             ->limit(1)
             ->get();
-            foreach($hot_product_big as $big){
-                array_push($arr,$big->product_id);
-            }
+
 
         $hot_product = DB::table('tbl_product')
             ->where([['product_hot','1'],['product_status','0']])
-            ->whereNotIn('product_id', $arr)
             ->paginate(8);
 
             //cÂY TRANG TRÍ TRONG NHÀ
-        $arr2  = [];
-        $hot_product_big2 = DB::table('tbl_product')
-            ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
-            ->where([['tbl_product.category_id','1'],['product_status','0']])
+        $hot_product_big2 = DB::table('tbl_category_product')
+            ->where([['category_id','1'],['category_status','0']])
             ->orderby(DB::raw('RAND()'))
             ->limit(1)
             ->get();
-        foreach($hot_product_big2 as $big2){
-            array_push($arr2,$big2->product_id);
-        }
 
         $hot_product2 = DB::table('tbl_product')
             ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
             ->where([['tbl_product.category_id','1'],['product_status','0']])
-            ->whereNotIn('product_id', $arr2)
             ->orderby(DB::raw('RAND()'))
             ->paginate(8);
-
         $blog = DB::table('tbl_posts')
             ->where([['post_status','0']])
             ->orderby('id','desc')

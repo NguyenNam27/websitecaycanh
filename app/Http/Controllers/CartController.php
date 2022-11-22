@@ -20,7 +20,9 @@ class CartController extends Controller
         $meta_desc = "Chuyên bán những cây cảnh lâu năm";
         $meta_keywords = "thiết bị cây cảnh,phụ kiện cắt tỉa,đồ dùng nông nghiệp";
         $meta_title = "Phụ kiện,thiết bị cho cây cảnh chính hãng";
+
         $url_canonical = $request->url();
+
         $cate_product = DB::table('tbl_category_product')
             ->where('category_status','0')
             ->orderby('category_id','desc')
@@ -83,7 +85,6 @@ class CartController extends Controller
     public function add_cart_ajax(Request $request){
         // Session::forget('cart');
         $data = $request->all();
-//        print_r($data);
         $session_id = substr(md5(microtime()),rand(0,26),5);
         $cart = Session::get('cart');
         if($cart==true){
@@ -124,9 +125,7 @@ class CartController extends Controller
     }
     public function delete_product($session_id){
         $cart = Session::get('cart');
-        // echo '<pre>';
-        // print_r($cart);
-        // echo '</pre>';
+
         if($cart==true){
             foreach($cart as $key => $val){
                 if($val['session_id']==$session_id){
@@ -184,7 +183,6 @@ class CartController extends Controller
         $productId = $request->productid_hidden;
         $quantity = $request->qty;
         $product_info = DB::table('tbl_product')->where('product_id',$productId)->first();
-
         // Cart::add('293ad', 'Product 1', 1, 9.99, 550);
         // Cart::destroy();
         $data['id'] = $product_info->product_id;

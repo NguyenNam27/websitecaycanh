@@ -73,7 +73,7 @@ Route::get('/unactive-category-product/{category_product_id}', [CategoryProduct:
 Route::get('/active-category-product/{category_product_id}', [CategoryProduct::class, 'active_category_product']);
 
 Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
-Route::post('/update-category-product/{category_product_id}', [CategoryProduct::class, 'update_category_product']);
+Route::post('/update-category-product/{category_id}', [CategoryProduct::class, 'update_category_product']);
 //Send Mail
 Route::get('/send-mail', [HomeController::class, 'send_mail']);
 
@@ -123,7 +123,7 @@ Route::post('/save-product', [ProductController::class, 'save_product']);
 Route::post('/update-product/{product_id}', [ProductController::class, 'update_product']);
 
 //Coupon
-Route::post('/save-product', [CartController::class, 'check_coupon']);
+Route::post('/check-coupon', [CartController::class, 'check_coupon']);
 Route::get('/unset-coupon', [CouponController::class, 'unset_coupon']);
 Route::get('/insert-coupon', [CouponController::class, 'insert_coupon']);
 
@@ -135,7 +135,7 @@ Route::post('/insert-coupon-code', [CouponController::class, 'insert_coupon_code
 //Cart
 Route::post('/update-cart-quantity', [CartController::class, 'update_cart_quantity']);
 Route::post('/update-cart', [CartController::class, 'update_cart']);
-Route::post('/save-cart', [CartController::class, 'save_cartsave_cart']);
+Route::post('/save-cart', [CartController::class, 'save_cart']);
 Route::post('/add-cart-ajax', [CartController::class, 'add_cart_ajax']);
 Route::get('/show-cart', [CartController::class, 'show_cart']);
 Route::get('/gio-hang', [CartController::class, 'gio_hang']);
@@ -144,6 +144,8 @@ Route::get('/del-product/{session_id}', [CartController::class, 'delete_product'
 Route::get('/del-all-product', [CartController::class, 'delete_all_product']);
 
 //Checkout
+Route::get('/dang-ky', [CheckoutController::class, 'register_checkout']);
+
 Route::get('/dang-nhap', [CheckoutController::class, 'login_checkout']);
 Route::get('/del-fee', [CheckoutController::class, 'del_fee']);
 

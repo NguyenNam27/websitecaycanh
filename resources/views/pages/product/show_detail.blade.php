@@ -28,7 +28,7 @@
                         <p>Số lượng:</p>
                     </div>
                 </div>
-                <form action="{{URL::to('/save-cart')}}" method="POST">
+                <form {{URL::to('/save-cart')}}" method="POST">
                     @csrf
                 <div class="row">
 
@@ -52,8 +52,8 @@
 
                     </div>
                     <div class="col-md-3">
-                        <button type="submit" class="btn btn-success add-to-cart"><i class="fa fa-shopping-cart "></i> Đặt hàng</button>
-{{--                        <input type="button" value="Thêm giỏ hàng" class="btn btn-success fa fa-shopping-cart add-to-cart" data-id_product="{{$details->product_id}}" name="add-to-cart">--}}
+{{--                        <button type="button" class="btn btn-success add-to-cart"><i class="fa fa-shopping-cart "></i> Đặt hàng</button>--}}
+                        <button type="button" class="btn btn-primary btn-sm add-to-cart " data-id_product="{{$details->product_id}}" name="add-to-cart">Đặt hàng</button>
                     </div>
 
 
