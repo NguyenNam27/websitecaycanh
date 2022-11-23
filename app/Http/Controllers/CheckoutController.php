@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Validate;
 use Session;
 use Cart;
 use App\Http\Requests;
@@ -154,6 +155,14 @@ class CheckoutController extends Controller
             ->with('slider',$slider);
     }
     public function login_checkout(Request $request){
+//        $request->validate([
+//            'email_account' => 'required|email',
+//            'password_account' => 'required|alpha',
+//        ],[
+//            'email_account.required'=>'Bạn chưa nhập email',
+//            'email_account.email'=>'Email chưa đúng định dạng',
+//            'password_account.required'=>'Bạn chưa nhập mật khẩu',
+//        ]);
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
 
         //seo
@@ -202,7 +211,7 @@ class CheckoutController extends Controller
         //--seo
 
     	$cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-//        $city = City::orderby('matp','ASC')->get();
+        $city = City::orderby('matp','ASC')->get();
         $hot_news = DB::table('tbl_posts')
             ->where([['hot_news','1'],['post_status','0']])
             ->orderby('id','desc')
@@ -213,7 +222,7 @@ class CheckoutController extends Controller
             ->with('meta_keywords',$meta_keywords)
             ->with('meta_title',$meta_title)
             ->with('url_canonical',$url_canonical)
-//            ->with('city',$city)
+            ->with('city',$city)
             ->with('hot_news',$hot_news)
 
             ->with('slider',$slider);

@@ -84,11 +84,25 @@
                             </tbody>
                         </table>
 
-                        <div style="margin-left: 620px; margin-bottom: 50px;">
-                            <p>Tổng tiền: {{number_format($total,0,',','.')}}đ</p>
-                            <p>Giảm giá:0đ</p>
-                            <p>Thanh toán:{{number_format($total,0,',','.')}}đ</p>
-                        </div>
+
+                            @if(Session::get('cart'))
+                                <tr >
+                                    <td>
+
+                                        <form method="POST" action="{{url('/check-coupon')}}">
+                                            @csrf
+                                            <input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá" style="width: 25%"><br>
+                                            <input type="submit" class="btn btn-default check_coupon" name="check_coupon" value="Tính mã giảm giá">
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endif
+                            <div style="margin-left: 620px; margin-bottom: 50px;">
+                                <p>Tổng tiền: {{number_format($total,0,',','.')}}đ</p>
+                                <p>Giảm giá:0đ</p>
+                                <p>Thanh toán:{{number_format($total,0,',','.')}}đ</p>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     @if(Session::get('customer_id'))
@@ -103,46 +117,6 @@
 
                         </form>
 
-{{--                        <div>--}}
-{{--                            <h3 style="margin-bottom: 50px">THÔNG TIN KHÁCH HÀNG</h3>--}}
-{{--                            <form>--}}
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="name" class="col-sm-2 form-control-label">Họ tên</label>--}}
-{{--                                    <div class="col-sm-10">--}}
-{{--                                        <input type="text" class="form-control" id="name" placeholder="Nhập đầy đủ họ tên..." required="">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="inputEmail3" class="col-sm-2 form-control-label">Email</label>--}}
-{{--                                    <div class="col-sm-10">--}}
-{{--                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="phone" class="col-sm-2 form-control-label">Điện thoại</label>--}}
-{{--                                    <div class="col-sm-10">--}}
-{{--                                        <input type="number" class="form-control" id="phone" placeholder="0945028297">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="address" class="col-sm-2 form-control-label">Địa chỉ</label>--}}
-{{--                                    <div class="col-sm-10">--}}
-{{--                                        <input type="text" class="form-control" id="address" placeholder="">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="status" class="col-sm-2 form-control-label">Ghi chú</label>--}}
-{{--                                    <div class="col-sm-10">--}}
-{{--                                        <textarea class="form-control"  id="status"></textarea>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group row">--}}
-{{--                                    <div class="col-sm-offset-2 col-sm-10">--}}
-{{--                                        <button type="submit" class="btn btn-primary btn_cart">Đặt hàng</button>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
 
                     </div>
                 </div>

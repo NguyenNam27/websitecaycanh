@@ -6,6 +6,15 @@
 
         <div class="form">
             <h2>Register</h2>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{URL::to('/add-customer')}}" method="POST" class="register-form">
                 @csrf
                 <input type="text" name="customer_name" placeholder="Họ và tên"/>

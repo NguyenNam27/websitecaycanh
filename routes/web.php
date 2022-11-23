@@ -164,7 +164,7 @@ Route::post('/save-checkout-customer', [CheckoutController::class, 'save_checkou
 
 Route::post('/calculate-fee', [CheckoutController::class, 'calculate_fee']);
 
-Route::post('/select-delivery-home', [CheckoutController::class, 'select-delivery-home']);
+Route::post('/select-delivery-home', [CheckoutController::class, 'select_delivery_home']);
 Route::post('/confirm-order', [CheckoutController::class, 'confirm_order']);
 
 //Order
