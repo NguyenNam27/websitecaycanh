@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2022 at 04:58 AM
+-- Generation Time: Nov 23, 2022 at 11:03 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -187,6 +187,7 @@ CREATE TABLE `tbl_category_product` (
   `meta_keywords` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug_category_product` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -197,13 +198,14 @@ CREATE TABLE `tbl_category_product` (
 -- Dumping data for table `tbl_category_product`
 --
 
-INSERT INTO `tbl_category_product` (`category_id`, `meta_keywords`, `category_name`, `slug_category_product`, `category_desc`, `category_status`, `created_at`, `updated_at`) VALUES
-(1, 'Cây trang trí trong nhà', 'Cây trang trí trong nhà', 'cay-trang-tri-trong-nha', 'Cây trang trí trong nhà', 0, NULL, NULL),
-(2, 'Cây trang trí sân vườn', 'Cây trang trí sân vườn', 'cay-trang-tri-san-vuon', 'Cây trang trí sân vườn', 0, NULL, NULL),
-(3, 'Cây phong thuỷ', 'Cây phong thuỷ', 'cay-phong-thuy', 'Cây phong thuỷ', 0, NULL, NULL),
-(4, 'Cây cổ thụ', 'Cây cổ thụ', 'cay-co-thu', 'Cây cổ thụ', 0, NULL, NULL),
-(5, 'Cây bóng mát', 'Cây bóng mát', 'cay-bong-mat', 'Cây bóng mát', 0, NULL, NULL),
-(6, 'Dịch vụ vật tư', 'Dịch vụ vật tư', 'dich-vu-vat-tu', 'Dịch vụ vật tư', 0, NULL, NULL);
+INSERT INTO `tbl_category_product` (`category_id`, `meta_keywords`, `category_name`, `slug_category_product`, `category_image`, `category_desc`, `category_status`, `created_at`, `updated_at`) VALUES
+(1, 'Cây trang trí trong nhà', 'Cây trang trí trong nhà', 'cay-trang-tri-trong-nha', 'anh116.png', 'Cây trang trí trong nhà', 0, NULL, NULL),
+(2, 'Cây trang trí sân vườn', 'Cây trang trí sân vườn', 'cay-trang-tri-san-vuon', 'anh258.png', 'Cây trang trí sân vườn', 0, NULL, NULL),
+(3, 'Cây phong thuỷ', 'Cây phong thuỷ', 'cay-phong-thuy', 'anh196.png', 'Cây phong thuỷ', 0, NULL, NULL),
+(4, 'Cây cổ thụ', 'Cây cổ thụ', 'cay-co-thu', 'anh240.png', 'Cây cổ thụ', 0, NULL, NULL),
+(5, 'Cây bóng mát', 'Cây bóng mát', 'cay-bong-mat', 'anh266.png', 'Cây bóng mát', 0, NULL, NULL),
+(6, 'Dịch vụ vật tư', 'Dịch vụ vật tư', 'dich-vu-vat-tu', 'anh184.png', 'Dịch vụ vật tư', 0, NULL, NULL),
+(19, 'Sản phẩm bán chạy', 'Sản phẩm bán chạy', 'san-pham-ban-chay', 'anh286.png', 'Sản phẩm bán chạy', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -243,8 +245,8 @@ CREATE TABLE `tbl_customers` (
   `customer_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `customer_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `customer_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -252,17 +254,10 @@ CREATE TABLE `tbl_customers` (
 --
 
 INSERT INTO `tbl_customers` (`customer_id`, `customer_name`, `customer_email`, `customer_password`, `customer_phone`, `created_at`, `updated_at`) VALUES
-(5, 'Hoàng thị yến vi', 'yenvi@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0932023992', NULL, NULL),
-(6, 'Trương Ngọc Tấn Hiếu', 'hieu123@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0932023992', NULL, NULL),
-(7, 'Anh hieu dep giai 123', 'depgiai123@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0932023992', NULL, NULL),
-(8, 'Nguyen Nguyen', 'nguyenngocnam00770@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0975720527', NULL, NULL),
-(9, 'Nguyen Nguyen', 'nguyenngocnam00770@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0566762451', NULL, NULL),
-(10, 'Nguyen Nguyen', 'nguyenngocnam0077000@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0975720527', NULL, NULL),
-(11, 'Nguyen Nguyen', 'nguyenngocnam000@gmail.com', '25d55ad283aa400af464c76d713c07ad', '0566762451', NULL, NULL),
-(12, 'Nguyen Nguyen', 'nguyenngocnam10@gmail.com', '25d55ad283aa400af464c76d713c07ad', '0975720527', NULL, NULL),
-(13, 'PhạmVinh', 'nguyennam00@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0975720527', NULL, NULL),
-(14, 'PhạmVinh', 'nguyennam00@gmail.com', '25d55ad283aa400af464c76d713c07ad', '0975720527', NULL, NULL),
-(15, 'anh4', 'nguyenngocnam00770@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0975720527', NULL, NULL);
+(16, 'Nguyen Nguyen', 'nguyenngocnam00770@gmail.com', '25d55ad283aa400af464c76d713c07ad', '0566762451', NULL, NULL),
+(17, 'PhạmVinh', 'nguyennam00@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0975720527', NULL, NULL),
+(18, 'Nguyen Nguyen2', 'nguyenngocnam007702@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0566762451', NULL, NULL),
+(19, 'Nguyen Nguyen2', 'nguyenngocnam007702@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0566762451', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -415,7 +410,7 @@ CREATE TABLE `tbl_product` (
   `product_sold` int(11) DEFAULT NULL,
   `product_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_id` int(11) UNSIGNED NOT NULL,
-  `brand_id` int(11) UNSIGNED NOT NULL,
+  `brand_id` int(11) UNSIGNED DEFAULT NULL,
   `product_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -431,8 +426,6 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_quantity`, `product_sold`, `product_slug`, `category_id`, `brand_id`, `product_desc`, `product_content`, `product_price`, `product_image`, `product_hot`, `product_status`, `created_at`, `updated_at`) VALUES
-(6, 'Royal Canin Urinary Canine Dog 2kg - Dành cho chó bị sỏi thận-10kg', '40', 10, 'royal-canin-urinary-canine-dog-2kg-danh-cho-cho-bi-soi-than-10kg', 6, 7, '<p>&nbsp;</p>\r\n\r\n<p>Royal Canin Urinary Canine Dog 2kg - D&agrave;nh cho ch&oacute; bị sỏi thận</p>', '<p><strong>Nguy&ecirc;n liệu</strong></p>\r\n\r\n<p>Bột bắp, gạo, chất b&eacute;o động vật, protein gia cầm, gluten bắp, kho&aacute;ng chất, protein động vật, xơ thực vật, dầu đậu n&agrave;nh, dầu c&aacute;, fructo-oligo-sacarit, monoglycerit v&agrave; diglycerit của axit palmitic v&agrave; stearic từ phản ứng este h&oacute;a với axit citric, chiết xuất c&uacute;c vạn thọ (nguồn lutein).<br />\r\nNguồn protein: protein gia cầm, gluten bắp, protein động vật.</p>\r\n\r\n<p>Phụ gia dinh dưỡng: Vitamin A, Vitamin D3, E1(Sắt), E2 (I ốt), E4 (Đồng), E5 (Mangan), E6 (Kẽm), E8 (Selen), Chất axit h&oacute;a nước tiểu: Canxi Sunfat (0.88%). Chất chống oxi h&oacute;a.</p>\r\n\r\n<p><strong>Th&agrave;nh phần dinh dưỡng</strong></p>\r\n\r\n<p><img alt=\"\" src=\"https://www.petcity.vn/media/lib/4372_Thnhphndinhdng.jpg\" /></p>\r\n\r\n<p><strong>Đặc t&iacute;nh nổi bật</strong></p>\r\n\r\n<p><img alt=\"\" src=\"https://www.petcity.vn/media/lib/4372_ctnhnibt.jpg\" /></p>\r\n\r\n<p><strong>Khẩu phần ăn chuẩn</strong>&nbsp;</p>\r\n\r\n<p><img alt=\"\" src=\"https://www.petcity.vn/media/lib/4372_Bngnthamkho.jpg\" /></p>', '431000', '8dcbd9462bb79e0494cc3a8272add3f632.jfif', 0, 0, NULL, NULL),
-(7, 'Thức ăn cho chó nhỏ trưởng thành Farmina N&D PUMPKIN vị heo, bí ngô và táo 3kg', '98', 2, 'thuc-an-cho-cho-nho-truong-thanh-farmina-nd-pumpkin-vi-heo-bi-ngo-va-tao-3kg', 6, 7, '<p>Thức ăn cho ch&oacute; nhỏ trưởng th&agrave;nh Farmina N&amp;D PUMPKIN vị heo, b&iacute; ng&ocirc; v&agrave; t&aacute;o 3kg</p>', '<h3>Farmina - N&amp;D PUMPKIN DOG boar, apple mini adult</h3>\r\n\r\n<p>(d&agrave;nh cho ch&oacute; nhỏ tr&ecirc;n 10 th&aacute;ng tuổi)</p>\r\n\r\n<p>Vị heo, b&iacute; ng&ocirc; v&agrave; t&aacute;o</p>\r\n\r\n<figure class=\"easyimage easyimage-full\"><img alt=\"\" src=\"blob:http://localhost/78cb3d06-bf55-435e-bdf7-33be79a67da8\" width=\"250\" />\r\n<figcaption></figcaption>\r\n</figure>\r\n\r\n<p><strong>Th&agrave;nh phần&nbsp;</strong></p>\r\n\r\n<p>Thịt lợn rừng kh&ocirc;ng xương (24%), protein thịt lợn mất nước (22%), tinh bột đậu (20%), mỡ g&agrave;, b&iacute; ng&ocirc; khử nước (5%), trứng khử nước, dầu c&aacute;, chất xơ thực vật, c&agrave; rốt kh&ocirc;, cỏ linh lăng kh&ocirc;, inulin, fructooligosacarit, mannanoligosacarit, t&aacute;o khử nước (0,5%), bột rau bina, psyllium (0,3%), bột lựu, bột blackcurrant, cam ngọt, nước ngọt , chondroitin sulphate, chiết xuất c&uacute;c vạn thọ (nguồn lutein)</p>', '230000', '8dcbd9462bb79e0494cc3a8272add3f660.jfif', 0, 0, NULL, NULL),
 (9, 'Cây lan ý', '60', NULL, 'cay-lan-y', 6, 25, '<p><em><strong>C&acirc;y lan &yacute;</strong></em></p>', '<h3><em><strong>C&acirc;y lan &yacute;</strong></em></h3>', '450000', 'anh113.png', 1, 0, NULL, NULL),
 (10, 'Cây ngọc ngân', '100', NULL, 'cay-ngoc-ngan', 6, 25, '<p><em><strong>C&acirc;y ngọc ng&acirc;n</strong></em></p>', '<h3><em><strong>C&acirc;y ngọc ng&acirc;n</strong></em></h3>', '125000', 'anh257.png', 0, 0, NULL, NULL),
 (13, 'Cây phú quý', '100', NULL, 'cay-phu-quy', 6, 25, '<p><em><strong>C&acirc;y ph&uacute; qu&yacute;</strong></em></p>', '<p>C&acirc;y ph&uacute; qu&yacute; l&agrave; dạng c&acirc;y trồng trong nh&agrave; c&oacute; sự lọc kh&iacute; rất tốt, c&aacute;c chất độc hại, chất bụi từ b&ecirc;n ngo&agrave;i được c&acirc;y thanh lọc rất tốt. Từ đ&oacute; mang về cho kh&ocirc;ng gian nh&agrave; bạn trong l&agrave;nh v&agrave; tươi m&aacute;t.</p>\r\n\r\n<p><img alt=\"cay-xanh-trong-nha_214\" height=\"600\" sizes=\"(max-width: 600px) 100vw, 600px\" src=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_214.jpg\" srcset=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_214.jpg 600w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_214-150x150.jpg 150w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_214-300x300.jpg 300w\" width=\"600\" /></p>', '138000', 'anh219.png', 0, 0, NULL, NULL),
@@ -466,7 +459,8 @@ INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_quantity`, `pr
 (52, 'Cây lưỡi hổ 2', '10', NULL, 'cay-luoi-ho-2', 1, 25, '<p>C&acirc;y lưỡi hổ 2</p>', '<p>C&acirc;y lưỡi hổ l&agrave; loại&nbsp;<strong>c&acirc;y cảnh trang tr&iacute; nh&agrave;</strong>&nbsp;rất c&oacute; lợi cho sức khỏe khi tăng cường lượng oxy v&agrave;o ban đ&ecirc;m n&ecirc;n th&iacute;ch hợp đặt ở ph&ograve;ng ngủ, ph&ograve;ng l&agrave;m việc c&oacute; nhiều m&aacute;y in, m&aacute;y vi t&iacute;nh để c&acirc;y gi&uacute;p lọc kh&ocirc;ng kh&iacute;. Trong kh&ocirc;ng gian văn ph&ograve;ng vị tr&iacute; đặt c&acirc;y lưỡi hỗ n&ecirc;n được c&acirc;n nhắc ngay từ giai đoạn&nbsp;<a href=\"https://nhadepso.com/thiet-ke-van-phong\" rel=\"noopener noreferrer\" target=\"_blank\">thiết kế nội thất văn ph&ograve;ng</a>&nbsp;sẽ gi&uacute;p tạo được kh&ocirc;ng gian thẫm mỹ v&agrave; hiệu quả hơn. Mỗi c&acirc;y lưỡi hổ thường c&oacute; chiều cao từ 50-80cm, l&aacute; h&igrave;nh dải d&agrave;i rất gọn g&agrave;ng n&ecirc;n bạn c&oacute; thể trang tr&iacute; được nhiều g&oacute;c trong ng&ocirc;i nh&agrave; của m&igrave;nh.</p>\r\n\r\n<p><img alt=\"Cây lưỡi hổ là loại cây cảnh trang trí nhà rất có lợi cho sức khỏe\" height=\"488\" sizes=\"(max-width: 650px) 100vw, 650px\" src=\"https://nhadepso.com/wp-content/uploads/2017/05/cayluoiho.jpg\" srcset=\"https://nhadepso.com/wp-content/uploads/2017/05/cayluoiho.jpg 650w, https://nhadepso.com/wp-content/uploads/2017/05/cayluoiho-300x225.jpg 300w\" title=\"[10 loại] Cây cảnh trang trí nhà đẹp ngỡ ngàng 14\" width=\"650\" /></p>', '200000', 'tnb272.png', 0, 0, '2021-10-09 07:56:54', '2021-10-09 07:56:54'),
 (53, 'Cây không khí 2', '10', NULL, 'cay-khong-khi-2', 2, 25, '<p>C&acirc;y kh&ocirc;ng kh&iacute;</p>', '<p>C&acirc;y kh&ocirc;ng kh&iacute; được nhiều gia đ&igrave;nh ưa chuộng bởi kh&ocirc;ng tốn qu&aacute; nhiều c&ocirc;ng chăm s&oacute;c c&acirc;y vẫn c&oacute; thể sinh trưởng tốt chỉ dựa v&agrave;o độ ẩm của kh&ocirc;ng kh&iacute;. V&igrave; dễ trồng, dễ chăm s&oacute;c lại c&oacute; thể ph&aacute;t triển d&ugrave; bị treo ngược n&ecirc;n c&acirc;y kh&ocirc;ng kh&iacute; trở th&agrave;nh lo&agrave;i c&acirc;y cảnh được &ldquo;săn đ&oacute;n&rdquo; h&agrave;ng đầu trong trang tr&iacute; nh&agrave; theo c&aacute;ch độc đ&aacute;o.</p>\r\n\r\n<p><img alt=\"Cây không khí được nhiều gia đình ưa chuộng\" height=\"780\" sizes=\"(max-width: 650px) 100vw, 650px\" src=\"https://nhadepso.com/wp-content/uploads/2017/05/caykhongkhi.jpg\" srcset=\"https://nhadepso.com/wp-content/uploads/2017/05/caykhongkhi.jpg 650w, https://nhadepso.com/wp-content/uploads/2017/05/caykhongkhi-300x360.jpg 300w\" title=\"[10 loại] Cây cảnh trang trí nhà đẹp ngỡ ngàng 15\" width=\"650\" /></p>', '200000', 'tnb325.png', 0, 0, '2021-10-09 08:07:25', '2021-10-09 08:07:25'),
 (54, 'Cây đuôi lừa 12', '10', 0, 'cay-duoi-lua-12', 1, 25, '<p>C&acirc;y đu&ocirc;i lừa</p>', '<p>C&acirc;y đu&ocirc;i lừa sở hữu vẻ ngo&agrave;i độc đ&aacute;o kh&ocirc;ng giống bất kỳ lo&agrave;i c&acirc;y n&agrave;o kh&aacute;c n&ecirc;n rất được ưa chuộng, nhất l&agrave; c&aacute;c kiến tr&uacute;c sư rất th&iacute;ch chọn c&acirc;y n&agrave;y trong c&aacute;c thiết kế của m&igrave;nh. C&acirc;y đu&ocirc;i lừa chỉ ph&aacute;t triển trong điều kiện c&oacute; nguồn &aacute;nh s&aacute;ng mặt trời chiếu trực tiếp v&agrave; phải thường xuy&ecirc;n tưới nước cho c&acirc;y khi mang em ấy về nh&agrave; bạn nh&eacute;!</p>\r\n\r\n<p><img alt=\"Cây đuôi lừa sở hữu vẻ ngoài độc đáo không giống bất kỳ loài cây nào khác nên rất được ưa chuộng\" height=\"945\" sizes=\"(max-width: 650px) 100vw, 650px\" src=\"https://nhadepso.com/wp-content/uploads/2017/05/cayduoilua.jpg\" srcset=\"https://nhadepso.com/wp-content/uploads/2017/05/cayduoilua.jpg 650w, https://nhadepso.com/wp-content/uploads/2017/05/cayduoilua-300x436.jpg 300w\" title=\"[10 loại] Cây cảnh trang trí nhà đẹp ngỡ ngàng 16\" width=\"650\" /></p>', '150000', 'tnb251.png', 0, 0, '2021-10-09 08:09:33', '2021-10-09 08:09:33'),
-(55, 'Cây xương rồng tai thỏ 2', '10', NULL, 'cay-xuong-rong-tai-tho-2', 1, 25, '<pre>\r\nC&acirc;y xương rồng tai thỏ 2 c&oacute; &yacute; nghĩa phong thủy tăng t&agrave;i vận cho gia chủ. Người ta quan niệm trồng vạn ni&ecirc;n thanh trong nh&agrave; ng&agrave;y tết mang đến sự sung t&uacute;c.</pre>', '<pre>\r\nC&acirc;y xương rồng tai thỏ 2 c&oacute; &yacute; nghĩa phong thủy tăng t&agrave;i vận cho gia chủ. Người ta quan niệm trồng vạn ni&ecirc;n thanh trong nh&agrave; ng&agrave;y tết mang đến sự sung t&uacute;c.</pre>', '44900', 'tnb221.png', 0, 0, NULL, NULL);
+(55, 'Cây xương rồng tai thỏ 2', '10', NULL, 'cay-xuong-rong-tai-tho-2', 1, 25, '<pre>\r\nC&acirc;y xương rồng tai thỏ 2 c&oacute; &yacute; nghĩa phong thủy tăng t&agrave;i vận cho gia chủ. Người ta quan niệm trồng vạn ni&ecirc;n thanh trong nh&agrave; ng&agrave;y tết mang đến sự sung t&uacute;c.</pre>', '<pre>\r\nC&acirc;y xương rồng tai thỏ 2 c&oacute; &yacute; nghĩa phong thủy tăng t&agrave;i vận cho gia chủ. Người ta quan niệm trồng vạn ni&ecirc;n thanh trong nh&agrave; ng&agrave;y tết mang đến sự sung t&uacute;c.</pre>', '44900', 'tnb337.png', 1, 0, NULL, NULL),
+(56, 'Cây xương rồng tai thỏ 3', '10', NULL, 'cay-xuong-rong-tai-tho-3', 2, NULL, '<p>C&acirc;y xương rồng tai thỏ 3</p>', '<p>C&acirc;y xương rồng tai thỏ 3</p>', '250000', 'tnb211.png', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -12791,7 +12785,7 @@ ALTER TABLE `tbl_brand`
 -- AUTO_INCREMENT for table `tbl_category_product`
 --
 ALTER TABLE `tbl_category_product`
-  MODIFY `category_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `category_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_coupon`
@@ -12803,7 +12797,7 @@ ALTER TABLE `tbl_coupon`
 -- AUTO_INCREMENT for table `tbl_customers`
 --
 ALTER TABLE `tbl_customers`
-  MODIFY `customer_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `customer_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_feeship`
@@ -12839,7 +12833,7 @@ ALTER TABLE `tbl_posts`
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `product_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `product_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `tbl_roles`
