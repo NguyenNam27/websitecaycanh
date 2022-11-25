@@ -91,134 +91,198 @@
                                 </table>
                             </form>
 
-                                <div style="margin-left: 620px; margin-bottom: 50px;">
-                                    <p><strong>Tổng tiền: {{number_format($total,0,',','.')}}đ</strong></p>
-                                    @if(Session::get('coupon'))
-                                        <li>
+                            <div style="margin-left: 620px; margin-bottom: 50px;">
+                                <p><strong>Tổng tiền: {{number_format($total,0,',','.')}}đ</strong></p>
+                                @if(Session::get('coupon'))
+                                    @foreach(Session::get('coupon') as $key => $cou)
+                                        @if($cou['coupon_condition']==1)
+                                            Mã giảm : {{$cou['coupon_number']}} %
+                                            <p>
+                                                @php
+                                                    $total_coupon = ($total*$cou['coupon_number'])/100;
+                                                @endphp
+                                            </p>
+                                            <p>
+                                                @php
+                                                    $total_after_coupon = $total-$total_coupon;
+                                                @endphp
+                                            </p>
+                                        @elseif($cou['coupon_condition']==2)
 
-                                            @foreach(Session::get('coupon') as $key => $cou)
-                                                @if($cou['coupon_condition']==1)
-                                                    Mã giảm : {{$cou['coupon_number']}} %
-                                                    <p>
-                                                        @php
-                                                            $total_coupon = ($total*$cou['coupon_number'])/100;
-                                                            echo '<p><li>Tổng giảm:'.number_format($total_coupon,0,',','.').'đ</li></p>';
-                                                        @endphp
-                                                    </p>
-                                                    <p>Tổng đã giảm :{{number_format($total-$total_coupon,0,',','.')}}
-                                                        đ</p>
-                                                @elseif($cou['coupon_condition']==2)
+                                            Mã giảm : {{number_format($cou['coupon_number'],0,',','.')}} k
+                                            <p>
+                                                @php
+                                                    $total_coupon = $total - $cou['coupon_number'];
 
-                                                    Mã giảm : {{number_format($cou['coupon_number'],0,',','.')}} k
-                                                    <p>
-                                                        @php
-                                                            $total_coupon = $total - $cou['coupon_number'];
+                                                @endphp
+                                            </p>
+                                            @php
+                                                $total_after_coupon = $total_coupon;
+                                            @endphp
+                                        @endif
+                                        @if(Session::get('fee'))
+                                            <li>
+                                                Phí vận
+                                                chuyển:<span>{{number_format(Session::get('fee'),0,',','.')}}đ</span>
+                                            </li>
+                                            <?php $total_after_fee = $total + Session::get('fee')
+                                            ?>
+                                        @endif
 
-                                                        @endphp
-                                                    </p>
-                                                    <p><strong>Thanh toán :{{number_format($total_coupon,0,',','.')}}
-                                                            đ</strong></p>
-                                                @endif
-                                            @endforeach
-                                        </li>
-                                    @endif
-                                </div>
-                                @if(Session::get('cart'))
-                                    <tr>
-                                        <td>
+                                    @endforeach
 
-                                            <form method="POST" action="{{url('/check-coupon')}}">
-                                                @csrf
-                                                <input type="text" class="form-control" name="coupon"
-                                                       placeholder="Nhập mã giảm giá" style="width: 25%"><br>
-                                                <input type="submit" class="btn btn-default check_coupon"
-                                                       name="check_coupon" value="Tính mã giảm giá">
-                                            </form>
-                                        </td>
-                                    </tr>
                                 @endif
+                                <br>
+                                <p>
+                                    <strong> Thanh Toán:
+                                        @php
+                                            if(Session::get('fee') && !Session::get('coupon') ){
+                                                    $total_after = $total_after_fee;
+                                                    echo  number_format($total_after,0,',','.').'đ';
+                                            }
+                                            elseif (!Session::get('fee') && Session::get('coupon')){
+                                                    $total_after = $total_after_coupon;
+                                                    echo number_format($total_after,0,',','.').'đ';
+                                            }
+                                            elseif ( Session::get('fee') && Session::get('coupon')){
+                                                    $total_after = $total_after_coupon;
+                                                    $total_after = $total_after + Session::get('fee');
+                                                    echo number_format($total_after,0,',','.').'đ';
+                                            }elseif (!Session::get('fee') && !Session::get('coupon')){
+                                                     $total_after = $total;
+                                                     echo number_format($total_after,0,',','.').'đ';
+                                            }
+                                        @endphp
+                                    </strong>
+                                </p>
+                            </div>
 
 
+                            @if(Session::get('cart'))
+                                <tr>
+                                    <td>
 
+                                        <form method="POST" action="{{url('/check-coupon')}}">
+                                            @csrf
+                                            <input type="text" class="form-control" name="coupon"
+                                                   placeholder="Nhập mã giảm giá" style="width: 25%"><br>
+                                            <input type="submit" class="btn btn-primary check_coupon"
+                                                   name="check_coupon" value="Tính mã giảm giá">
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endif
+                            <br>
+                            <form class="select_form">
+                                @csrf
+                                <div class="form-group row">
+                                    <label for="name" class="col-sm-2 form-control-label">Chọn thành phố</label>
+                                    <select name="city" id="city" class="col-sm-10 choose city"
+                                            style="border: 1px solid #ced4da">
+
+                                        <option value="" selected disabled>--Chọn tỉnh thành phố--</option>
+                                        @foreach($city as $key => $ci)
+                                            <option value="{{$ci->matp}}">{{$ci->name_city}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="name" class="col-sm-2 form-control-label">Chọn quận
+                                        huyện</label>
+                                    <select name="province" id="province" class="col-sm-10 choose "
+                                            style="border: 1px solid #ced4da">
+                                        <option value="" selected disabled>--Chọn quận huyện--</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="name" class="col-sm-2 form-control-label">Chọn phường xã</label>
+                                    <select name="wards" id="wards" class="col-sm-10" style="border: 1px solid #ced4da">
+                                        <option value="" selected disabled>--Chọn xã phường--</option>
+
+                                    </select>
+                                </div>
+
+                                <input type="button" value="Tính phí vận chuyển" name="calculate_order"
+                                       class="btn btn-primary btn-sm calculate_delivery">
+                            </form>
                             <div>
-                                <h3 style="margin-bottom: 50px">THÔNG TIN ĐẶT HÀNG</h3>
-                                <form>
+                                <br>
+                                <h3 style="margin-bottom: 50px;text-align: center">THÔNG TIN ĐẶT HÀNG</h3>
+                                <form method="POST">
+                                    @csrf
                                     <div class="form-group row">
                                         <label for="name" class="col-sm-2 form-control-label">Họ tên</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="name"
+                                            <input type="text" class="form-control shipping_name" name="shipping_name"
                                                    placeholder="Nhập đầy đủ họ tên..." required="">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 form-control-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail3"
+                                            <input type="email" class="form-control shipping_email"
+                                                   name="shipping_email"
                                                    placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="phone" class="col-sm-2 form-control-label">Điện thoại</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" id="phone"
-                                                   placeholder="0945028297">
+                                            <input type="number" class="form-control shipping_phone"
+                                                   name="shipping_phone"
+                                                   placeholder="Điện thoại">
                                         </div>
                                     </div>
+
+
                                     <div class="form-group row">
                                         <label for="address" class="col-sm-2 form-control-label">Địa chỉ</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="address" placeholder="">
+                                            <input type="text" id="shipping_address" readonly="readonly" class="form-control shipping_address"
+                                                   name="shipping_address" placeholder=" Địa chỉ">
                                         </div>
                                     </div>
-                                    <form>
-                                        @csrf
-                                        <div class="form-group row">
-                                            <label for="name" class="col-sm-2 form-control-label">Chọn thành phố</label>
-                                            <select name="city" id="city" class="col-sm-10">
-
-                                                <option value="">--Chọn tỉnh thành phố--</option>
-                                                @foreach($city as $key => $ci)
-                                                    <option value="{{$ci->matp}}">{{$ci->name_city}}</option>
-                                                @endforeach
-
-                                            </select>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="name" class="col-sm-2 form-control-label">Chọn quận
-                                                huyện</label>
-                                            <select name="province" id="province" class="col-sm-10">
-                                                <option value="">--Chọn quận huyện--</option>
-
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="name" class="col-sm-2 form-control-label">Chọn phường xã</label>
-                                            <select name="wards" id="wards" class="col-sm-10">
-                                                <option value="">--Chọn xã phường--</option>
-
-                                            </select>
-                                        </div>
-
-                                        <input type="button" value="Tính phí vận chuyển" name="calculate_order"
-                                               class="btn btn-primary btn-sm calculate_delivery">
-                                    </form>
-
                                     <div class="form-group row">
                                         <label for="status" class="col-sm-2 form-control-label">Ghi chú</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="status"></textarea>
+                                            <textarea class="form-control shipping_notes"
+                                                      name="shipping_notes"></textarea>
                                         </div>
                                     </div>
+                                    @if(Session::get('fee'))
+                                        <input type="hidden" name="order_fee" class="order_fee"
+                                               value="{{Session::get('fee')}}">
+                                    @else
+                                        <input type="hidden" name="order_fee" class="order_fee" value="10000">
+                                    @endif
+
+                                    @if(Session::get('coupon'))
+                                        @foreach(Session::get('coupon') as $key => $cou)
+                                            <input type="hidden" name="order_coupon" class="order_coupon"
+                                                   value="{{$cou['coupon_code']}}">
+                                        @endforeach
+                                    @else
+                                        <input type="hidden" name="order_coupon" class="order_coupon" value="no">
+                                    @endif
+
                                     <div class="form-group row">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            @if(Session::get('customer_id'))
-                                                <a class="btn btn-primary btn_cart" href="{{url('/checkout')}}">Đặt
-                                                    hàng</a>
-                                            @else
-                                                <a class="btn btn-primary btn_cart" href="{{url('/dang-nhap')}}">Đặt
-                                                    hàng</a>
-                                            @endif
+                                        <label for="" class="col-sm-2 form-control-label">Chọn hình thức thanh
+                                            toán</label>
+                                        <select name="payment_select"
+                                                class="col-sm-10 payment_select">
+                                            <option value="0">Qua chuyển khoản</option>
+                                            <option value="1">Tiền mặt</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-offset-2 col-sm-10" style="text-align: center">
+                                            <button type="button" name="send_order"
+                                                    class="btn btn-primary btn-cart send_order">Xác nhận đặt hàng
+                                            </button>
                                         </div>
                                     </div>
                                 </form>

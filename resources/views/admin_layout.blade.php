@@ -30,7 +30,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="backend/js/jquery2.0.3.min.js"></script>
 <script src="backend/js/raphael-min.js"></script>
 <script src="backend/js/morris.js"></script>
-    <script type="text/javascript" src="backend/ckeditor/ckeditor.js"></script>
+    <script  src="backend/ckeditor/ckeditor.js" ></script>
+    <script src="backend/ckfinder/ckfinder.js" ></script>
 
 </head>
 <body>
@@ -100,6 +101,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <ul class="sub">
                         <li><a href="{{URL::to('/manage-slider')}}">Liệt kê slider</a></li>
                         <li><a href="{{URL::to('/add-slider')}}">Thêm slider</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <ul class="sub">
+                        <li><a href="{{URL::to('/all-introduce')}}">Liệt kê bài giới thiệu</a></li>
+                        <li><a href="{{URL::to('/add-introduce')}}">Thêm bài giới thiệu</a></li>
                     </ul>
                 </li>
 
@@ -180,11 +187,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="backend/js/scripts.js')}}"></script>
 <script src="backend/js/jquery.slimscroll.js"></script>
 <script src="backend/js/jquery.nicescroll.js"></script>
-<script src="backend/ckeditor/ckeditor.js')}}"></script>
 <script src="backend/js/jquery.form-validator.min.js"></script>
 <script src="backend/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-
     function ChangeToSlug()
         {
             var slug;
@@ -217,10 +222,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             document.getElementById('convert_slug').value = slug;
         }
 
-
-
-
 </script>
+
 <script type="text/javascript">
     $('.update_quantity_order').click(function(){
         var order_product_id = $(this).data('product_id');
@@ -386,14 +389,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         });
 </script>
+
 <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 
- <script type="text/javascript" >
+ <script >
         $(function () {
             // Replace the <textarea id="editor1"> with a CKEditor
             // instance, using default configuration.
+            //sản phẩm
             CKEDITOR.replace('ckeditor');
+
             CKEDITOR.replace('ckeditor1',{
+                filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
+                filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                filebrowserWindowWidth: '1000',
+                filebrowserWindowHeight: '700'
+            });
+            CKEDITOR.replace('id4',{
                 filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
                 filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
                 filebrowserWindowWidth: '1000',
@@ -412,13 +424,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 filebrowserWindowWidth: '1000',
                 filebrowserWindowHeight: '700'
             });
-            CKEDITOR.replace('id4',{
-                filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
-                filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-                filebrowserWindowWidth: '1000',
-                filebrowserWindowHeight: '700'
-            });
-            CKEDITOR.replace('id5',{
+
+            //end san phẩm
+            //bài blog
+            CKEDITOR.replace('ckeditor8',{
                 filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
                 filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
                 filebrowserWindowWidth: '1000',
@@ -431,7 +440,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 filebrowserWindowHeight: '700'
             });
 
-
+            CKEDITOR.replace('ckeditor10',{
+                filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
+                filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                filebrowserWindowWidth: '1000',
+                filebrowserWindowHeight: '700'
+            });
+            CKEDITOR.replace('ckeditor11',{
+                filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
+                filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                filebrowserWindowWidth: '1000',
+                filebrowserWindowHeight: '700'
+            });
+            //end blog
+            //gioi thieu
+            CKEDITOR.replace('ckeditor12',{
+                filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
+                filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                filebrowserWindowWidth: '1000',
+                filebrowserWindowHeight: '700'
+            });
+            CKEDITOR.replace('ckeditor13',{
+                filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
+                filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                filebrowserWindowWidth: '1000',
+                filebrowserWindowHeight: '700'
+            });
+            CKEDITOR.replace('ckeditor14',{
+                filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
+                filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                filebrowserWindowWidth: '1000',
+                filebrowserWindowHeight: '700'
+            });
+            CKEDITOR.replace('ckeditor15',{
+                filebrowserBrowseUrl: 'backend/ckfinder/ckfinder.html',
+                filebrowserUploadUrl: 'backend/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                filebrowserWindowWidth: '1000',
+                filebrowserWindowHeight: '700'
+            });
         })
 
 </script>

@@ -19,9 +19,6 @@ class AdminController extends Controller
     }
     public function callback_google(){
             $users = Socialite::driver('google')->stateless()->user();
-            // // return $users->id;
-            // return $users->name;
-            // return $users->email;
             $authUser = $this->findOrCreateUser($users,'google');
             $account_name = Login::where('admin_id',$authUser->user)->first();
             Session::put('admin_name',$account_name->admin_name);
@@ -135,7 +132,6 @@ class AdminController extends Controller
         ]);
         $admin_email = $data['admin_email'];
         $admin_password = md5($data['admin_password']);
-//        dd($admin_password);
         $login = Login::where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
 
 

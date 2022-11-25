@@ -14,6 +14,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\BlogController;
 
+use App\Http\Controllers\IntroduceController;
 
 
 
@@ -38,9 +39,8 @@ Route::get('/lien-he', [HomeController::class, 'contact']);
 
 //Route::get('/404','HomeController@error_page');
 
-//Route::post('/tim-kiem','HomeController@search');
-//
-//Route::get('/details_post/{slug}','HomeController@post_detail')->name('detail_post');
+Route::post('/tim-kiem', [HomeController::class, 'search']);
+
 
 
 //Danh muc san pham trang chu
@@ -194,6 +194,9 @@ Route::get('/active-slide/{slide_id}', [SliderController::class, 'active_slide']
 
 //tin tức
 Route::get('/all-post', [BlogController::class, 'all_post'])->name('allpost');
+Route::get('/details_post/{slug}', [HomeController::class, 'post_detail']);
+
+
 Route::get('/unactive-post/{id}', [BlogController::class, 'unactive_post']);
 Route::get('/active-post/{id}', [BlogController::class, 'active_post']);
 Route::get('/add-post', [BlogController::class, 'add_post'])->name('addpost');
@@ -202,9 +205,18 @@ Route::post('/save-post', [BlogController::class, 'save_post'])->name('savepost'
 Route::post('/update-post/{id}', [BlogController::class, 'update_post'])->name('updatepost');
 Route::get('/delete-post/{id}', [BlogController::class, 'delete_post'])->name('delete_post');
 
+//bai gioi thieu
+Route::get('/all-introduce', [IntroduceController::class, 'all_introduce']);
+Route::get('/add-introduce', [IntroduceController::class, 'add_introduce']);
+Route::get('/active-introduce/{id}', [IntroduceController::class, 'active_introduce']);
+Route::get('/unactive-introduce/{id}', [IntroduceController::class, 'unactive_introduce']);
 
+Route::post('/save-introduce', [IntroduceController::class, 'save_introduce'])->name('savepost');
+Route::get('/edit-introduce/{id}', [IntroduceController::class, 'edit_introduce']);
 
+Route::post('/update-introduce/{id}', [IntroduceController::class, 'update_introduce']);
 
+Route::get('/delete-introduce/{id}', [IntroduceController::class, 'delete_introduce']);
 
 
 

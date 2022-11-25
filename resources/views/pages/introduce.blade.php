@@ -6,26 +6,16 @@
             <div class="col-md-3">
                 <div class="tintuc_left">
                     <p class="tieude">TIN NỔI BẬT</p>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
+                    @foreach($hot_news as $new)
+                        <a href="{{URL::to('/details_post/'.$new->slug)}}"><img class="tieude_img"
+                                                                                src="{{asset('public/uploads/post/'.$new->image)}}"
+                                                                                alt=""></a>
+                        <a href="{{URL::to('/details_post/'.$new->slug)}}"><p
+                                class="text_tintuc_left">{{$new->title}}</p></a>
+                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png"
+                                              alt="">{{$new->created_at}}</p>
+                    @endforeach
+
                 </div>
             </div>
 
@@ -43,7 +33,20 @@
 
                     </section>
                     <div class="row gt">
-                        Thường thì nhiều người nghĩ cây cảnh không có độc nhưng gần đây các nhà nghiên cứu thực vật đã khám phá ra nhiều loài cây cảnh được trồng phổ biến rộng rãi ở Việt Nam có độc. Các nhà nghiên cứu khuyến cáo nên trồng ở vườn thuốc đặc dụng, không nên trồng làm cảnh ở nhà hoặc nơi công cộng để tránh bị ngộ độc nếu ăn hoặc hít phải. Các loại cây được trồng phổ biến như Trúc tiền, Mã đào, Hoàng nàn, Thông thiên, Bã đậu, Hồi núi[1]... đã được phát hiện là có chất cực độc
+                        @foreach($introduce as $value)
+{{--                            {{dd($value->short_description)}}--}}
+                            <div class="new__title">
+                                <h3><strong>{{$value->title}}</strong></h3>
+                                <span><strong>NOTICE</strong></span>
+                                <span>|</span>
+                                <span> <strong><i class="fa-regular fa-clock"></i> {{$value->created_at}}</strong></span>
+                            </div>
+                            <div class="new__info">
+                                {!! strip_tags($value->short_description) !!}
+                                {!! strip_tags($value->content) !!}
+
+                            </div>
+                        @endforeach
 
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use Illuminate\Http\Request;
 use DB;
 use Validate;
@@ -25,7 +26,6 @@ class CheckoutController extends Controller
 
     public function confirm_order(Request $request){
          $data = $request->all();
-
          $shipping = new Shipping();
          $shipping->shipping_name = $data['shipping_name'];
          $shipping->shipping_email = $data['shipping_email'];
@@ -34,7 +34,7 @@ class CheckoutController extends Controller
          $shipping->shipping_notes = $data['shipping_notes'];
          $shipping->shipping_method = $data['shipping_method'];
          $shipping->save();
-         $shipping_id = $shipping->shipping_id;
+        $shipping_id = $shipping->shipping_id;
 
          $checkout_code = substr(md5(microtime()),rand(0,26),5);
 
@@ -81,6 +81,7 @@ class CheckoutController extends Controller
     }
     public function calculate_fee(Request $request){
         $data = $request->all();
+
         if($data['matp']){
             $feeship = Feeship::where('fee_matp',$data['matp'])->where('fee_maqh',$data['maqh'])->where('fee_xaid',$data['xaid'])->get();
             if($feeship){
@@ -192,9 +193,10 @@ class CheckoutController extends Controller
     	$data['customer_email'] = $request->customer_email;
     	$data['customer_password'] = md5($request->customer_password);
     	$customer_id = DB::table('tbl_customers')->insertGetId($data);
+        Session::put('customer_id',$customer_id);
+        Session::put('customer_name',$request->customer_name);
 
-    	Session::put('customer_id',$customer_id);
-    	Session::put('customer_name',$request->customer_name);
+
     	return Redirect::to('/checkout');
 
 
@@ -241,68 +243,8 @@ class CheckoutController extends Controller
 
     	return Redirect::to('/payment');
     }
-    public function payment(Request $request){
-        //seo
-        $meta_desc = "Đăng nhập thanh toán";
-        $meta_keywords = "Đăng nhập thanh toán";
-        $meta_title = "Đăng nhập thanh toán";
-        $url_canonical = $request->url();
-        //--seo
-        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        return view('pages.checkout.payment')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
 
-    }
-    public function order_place(Request $request){
-        //insert payment_method
-        //seo
-        $meta_desc = "Đăng nhập thanh toán";
-        $meta_keywords = "Đăng nhập thanh toán";
-        $meta_title = "Đăng nhập thanh toán";
-        $url_canonical = $request->url();
-        //--seo
-        $data = array();
-        $data['payment_method'] = $request->payment_option;
-        $data['payment_status'] = 'Đang chờ xử lý';
-        $payment_id = DB::table('tbl_payment')->insertGetId($data);
 
-        //insert order
-        $order_data = array();
-        $order_data['customer_id'] = Session::get('customer_id');
-        $order_data['shipping_id'] = Session::get('shipping_id');
-        $order_data['payment_id'] = $payment_id;
-        $order_data['order_total'] = Cart::total();
-        $order_data['order_status'] = 'Đang chờ xử lý';
-        $order_id = DB::table('tbl_order')->insertGetId($order_data);
-
-        //insert order_details
-        $content = Cart::content();
-        foreach($content as $v_content){
-            $order_d_data['order_id'] = $order_id;
-            $order_d_data['product_id'] = $v_content->id;
-            $order_d_data['product_name'] = $v_content->name;
-            $order_d_data['product_price'] = $v_content->price;
-            $order_d_data['product_sales_quantity'] = $v_content->qty;
-            DB::table('tbl_order_details')->insert($order_d_data);
-        }
-        if($data['payment_method']==1){
-
-            echo 'Thanh toán thẻ ATM';
-
-        }elseif($data['payment_method']==2){
-            Cart::destroy();
-
-            $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-            $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-            return view('pages.checkout.handcash')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
-
-        }else{
-            echo 'Thẻ ghi nợ';
-
-        }
-
-        //return Redirect::to('/payment');
-    }
     public function logout_checkout(){
     	Session::forget('customer_id');
     	return Redirect::to('/dang-nhap');
@@ -324,7 +266,6 @@ class CheckoutController extends Controller
 
     }
     public function manage_order(){
-
         $this->AuthLogin();
         $all_order = DB::table('tbl_order')
         ->join('tbl_customers','tbl_order.customer_id','=','tbl_customers.customer_id')

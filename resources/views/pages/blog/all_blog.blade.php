@@ -9,8 +9,8 @@
 
                     <div class="tintuc1">
                         @foreach($hot_news as $new)
-                        <img class="tieude_img" src="{{asset('public/uploads/post/'.$new->image)}}" alt="">
-                        <a href=""><p class="text_tintuc_left">{{$new->title}}</p></a>
+                        <a href="{{URL::to('/details_post/'.$new->slug)}}"><img class="tieude_img" src="{{asset('public/uploads/post/'.$new->image)}}" alt=""></a>
+                        <a href="{{URL::to('/details_post/'.$new->slug)}}"><p class="text_tintuc_left">{{$new->title}}</p></a>
                         <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">{{$new->created_at}}</p>
                         @endforeach
                     </div>
@@ -33,12 +33,12 @@
                     @foreach($all_blog as $all)
                     <div class="row ">
                         <div class="col-md-4 tintuc2_right">
-                            <a href=""> <img  src="{{asset('public/uploads/post/'.$all->image)}}" alt="" width="100%" height="100%"></a>
+                            <a href="{{URL::to('/details_post/'.$all->slug)}}"> <img  src="{{asset('public/uploads/post/'.$all->image)}}" alt="" width="100%" height="100%"></a>
                         </div>
                         <div class="col-md-8 tintuc2_right">
-                            <a href="" class="text_tintuc2_right">{{$all->title}} </a>
+                            <a href="{{URL::to('/details_post/'.$all->slug)}}" class="text_tintuc2_right">{{$all->title}} </a>
                             <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">{{$all->created_at}}</p>
-                            <a href="" class="text2_tintuc2_right">{{strip_tags($all->short_description)}}</a>
+                            <a href="{{URL::to('/details_post/'.$all->slug)}}" class="text2_tintuc2_right">{!! strip_tags($all->short_description) !!}</a>
 
                         </div>
 

@@ -6,26 +6,15 @@
             <div class="col-md-3">
                 <div class="tintuc_left">
                     <p class="tieude">TIN NỔI BẬT</p>
+
                     <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
+                        @foreach($hot_news as $new2)
+                            <a href="{{URL::to('/details_post/'.$new2->slug)}}"><img class="tieude_img" src="{{asset('public/uploads/post/'.$new2->image)}}" alt=""></a>
+                            <a href="{{URL::to('/details_post/'.$new2->slug)}}"><p class="text_tintuc_left">{{$new2->title}}</p></a>
+                            <p class="sanp1"><img class="icon_tintuc" src="" alt="">{{$new2->created_at}}</p>
+                        @endforeach
                     </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
+
                 </div>
             </div>
 
@@ -50,7 +39,7 @@
                                         <div class=" hover-img">
                                             <img src="{{asset('public/uploads/product/'.$all2->product_image)}}" alt="" width="100%" class="image">
                                             <div class="middle">
-                                                <p>{{strip_tags($all2->product_desc)}}</p>
+                                                <p>{!! strip_tags($all2->product_desc) !!}</p>
                                                 <div class="btn-hover">
                                                     <a href="{{URL::to('/chi-tiet/'.$all2->product_slug)}}"><button class="btn btn-primary btn-sm">Chi tiêt</button></a>
                                                     <button class="btn btn-primary btn-sm">Mua ngay</button>
@@ -72,12 +61,7 @@
                         <div class="container">
                             <div class="row">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#"><<</a></li>
-
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">>></a></li>
+                                    {!! $category_by_id->links() !!}
                                 </ul>
                             </div>
 

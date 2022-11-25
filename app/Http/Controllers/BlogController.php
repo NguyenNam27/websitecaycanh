@@ -22,8 +22,8 @@ class BlogController extends Controller
     public function all_post(){
         $this->AuthLogin();
         $all_post = DB::table('tbl_posts')
-                    ->where('post_status','0')
-                    ->orderBy('tbl_posts.brand_id','desc')->paginate(2);
+                    ->orderBy('tbl_posts.id','desc')
+                    ->paginate(2);
         return view('admin.all_post',[
             'all_post'=>$all_post
         ]);
@@ -80,8 +80,6 @@ class BlogController extends Controller
     }
     public function edit_post($id){
         $edit_post = DB::table('tbl_posts')->where('id',$id)->get();
-//        dd($edit_post);
-//        $edit_post = Post::find($id);
 
         $brand = DB::table('tbl_brand')->orderBy('brand_id','desc')->get();
 

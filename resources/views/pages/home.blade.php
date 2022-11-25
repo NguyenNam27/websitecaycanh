@@ -47,7 +47,7 @@
                                         <a href="{{URL::to('/chi-tiet/'.$hot->product_slug)}}"></a>
                                     <img src="{{asset('public/uploads/product/'.$hot->product_image)}}" alt="" width="100%" class="image">
                                     <div class="middle">
-                                        <p>{{strip_tags($hot->product_desc)}}</p>
+                                        <p>{!! strip_tags($hot->product_desc) !!}</p>
                                         <div class="btn-hover">
                                             <a href="{{URL::to('/chi-tiet/'.$hot->product_slug)}}"><p class="btn btn-primary btn-sm">Chi tiêt</p></a>
                                             <button type="button" class="btn btn-primary btn-sm add-to-cart " data-id_product="{{$hot->product_id}}">Mua ngay</button>
@@ -116,7 +116,7 @@
                                 <div class=" hover-img">
                                     <img src="{{asset('public/uploads/product/'.$pro2->product_image)}}" alt="" width="100%" class="image">
                                     <div class="middle">
-                                        <p>{{strip_tags($pro2->product_desc)}}</p>
+                                        <p>{!! strip_tags($pro2->product_desc) !!}</p>
                                         <div class="btn-hover">
                                             <a href="{{URL::to('/chi-tiet/'.$pro2->product_slug)}}"><p class="btn btn-primary btn-sm">Chi tiêt</p></a>
                                             <button type="button" class="btn btn-primary btn-sm add-to-cart " data-id_product="{{$pro2->product_id}}">Mua ngay</button>
@@ -144,11 +144,11 @@
                 @foreach($blog as $blog)
                 <div class="col-12 col-sm-6 col-md-3 pad">
                     <div class="img-thumbnail thumbnail1">
-                        <img src="{{asset('public/uploads/post/'.$blog->image)}}" alt="" width="100%">
+                        <a href="{{URL::to('/details_post/'.$blog->slug)}}"><img src="{{asset('public/uploads/post/'.$blog->image)}}" alt="" width="100%"></a>
                         <div class="tintuc">
-                           <a> <h5><strong>{{$blog->title}}</strong></h5></a>
-                            <img src="Caycanh/img/icon2.png" alt=""> <small>{{$blog->created_at}}</small>
-                            <p><small>{{strip_tags($blog->short_description)}} </small></p>
+                           <a href="{{URL::to('/details_post/'.$blog->slug)}}"> <h5><strong>{{$blog->title}}</strong></h5></a>
+                            <img src="Caycanh/img/icon2.png" alt=""> <small>{{$blog->created_at}}</small><br>
+                            <a href="{{URL::to('/details_post/'.$blog->slug)}}"><small>{!! strip_tags($blog->short_description) !!} </small></a>
                         </div>
                     </div>
                 </div>
@@ -157,62 +157,9 @@
             </div>
             <br>
             <div class="text-center">
-                <button type="button" class="btn btn-light ">Xem thêm <i class="fa fa-caret-right caret1"></i></button>
+                <a href="{{URL::to('/tin-tuc')}}" class="btn btn-light ">Xem thêm <i class="fa fa-caret-right caret1"></i></a>
             </div>
         </div>
     </section>
     <section class="clear"></section>
-    <section class="jumbotron jumbotron1">
-        <div class="container">
-            <h2 class="text-center">Ý KIẾN KHÁCH HÀNG</h2><br>
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-4 pad">
-                    <div class="img-thumbnail ">
-                        <p class="border1"><small>Mỗi loài hoa mang một thông điệp ý nghĩa mà bạn dành tặng cho người thân.Hoa lụa mà bạn dành tặng cho
-                                người thân. Hoa lụa Phương Thảo xin giới thiệu ý nghĩa một số loài hoa thông dụng trong cuộc sống hàng ngày tới
-                                các bạn. Hy vọng rằng nó sẽ giúp ích cho các bạn mỗi lần tặng hoa...</small></p>
-                        <div class="row avata">
-                            <div><img src="Caycanh/img/avata1.png" alt=""></div>
-                            <div class="p-3">
-                                <h5>Nguyễn Vân Anh</h5>
-                                <p><small>Hà Nội</small></p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 pad">
-                    <div class="img-thumbnail ">
-                        <p class="border1"><small>Mỗi loài hoa mang một thông điệp ý nghĩa mà bạn dành tặng cho người thân.Hoa lụa mà bạn dành tặng cho
-                                người thân. Hoa lụa Phương Thảo xin giới thiệu ý nghĩa một số loài hoa thông dụng trong cuộc sống hàng ngày tới
-                                các bạn. Hy vọng rằng nó sẽ giúp ích cho các bạn mỗi lần tặng hoa...</small></p>
-                        <div class="row avata">
-                            <div><img src="Caycanh/img/avata1.png" alt=""></div>
-                            <div class="p-3">
-                                <h5>Nguyễn Vân Anh</h5>
-                                <p><small>Hà Nội</small></p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 pad">
-                    <div class="img-thumbnail ">
-                        <p class="border1"><small>Mỗi loài hoa mang một thông điệp ý nghĩa mà bạn dành tặng cho người thân.Hoa lụa mà bạn dành tặng cho
-                                người thân. Hoa lụa Phương Thảo xin giới thiệu ý nghĩa một số loài hoa thông dụng trong cuộc sống hàng ngày tới
-                                các bạn. Hy vọng rằng nó sẽ giúp ích cho các bạn mỗi lần tặng hoa...</small></p>
-                        <div class="row avata">
-                            <div><img src="Caycanh/img/avata1.png" alt=""></div>
-                            <div class="p-3">
-                                <h5>Nguyễn Vân Anh</h5>
-                                <p><small>Hà Nội</small></p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </section>
 @endsection

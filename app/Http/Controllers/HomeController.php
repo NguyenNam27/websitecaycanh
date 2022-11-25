@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Product;
 use Illuminate\Http\Request;
 use DB;
 use Session;
@@ -97,13 +98,23 @@ class HomeController extends Controller
         $meta_title = "Phụ kiện,thiết bị cho cây cảnh chính hãng";
         $url_canonical = $request->url();
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-
+        $hot_news = DB::table('tbl_posts')
+            ->where([['hot_news','1'],['post_status','0']])
+            ->orderby('id','desc')
+            ->get();
+        $introduce = DB::table('tbl_introduces')
+                    ->where([['introduce_status','0']])
+                    ->orderby('id','desc')
+                    ->limit(1)
+                    ->get();
         return view('pages.introduce')
             ->with('slider',$slider)
             ->with('meta_desc',$meta_desc)
             ->with('meta_keywords',$meta_keywords)
             ->with('meta_title',$meta_title)
             ->with('url_canonical',$url_canonical)
+            ->with('hot_news',$hot_news)
+            ->with('introduce',$introduce)
             ->with('category',$cate_product);
     }
     public function product(Request $request){
@@ -119,7 +130,8 @@ class HomeController extends Controller
             ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
             ->where('product_status','0')
             ->orderby('tbl_product.product_id','desc')
-            ->paginate(16);
+            ->simplePaginate(16);
+//        dd($all_product);
         $arr_hot = [];
 
         $hot_news = DB::table('tbl_posts')
@@ -187,12 +199,21 @@ class HomeController extends Controller
         $keywords = $request->keywords_submit;
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-
+        $hot_news = DB::table('tbl_posts')
+            ->where([['hot_news','1'],['post_status','0']])
+            ->orderby('id','desc')
+            ->get();
         $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keywords.'%')->get();
 
-
-        return view('pages.sanpham.search')->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider);
+        return view('pages.product.search')
+            ->with('category',$cate_product)
+            ->with('hot_news',$hot_news)
+            ->with('search_product',$search_product)
+            ->with('meta_desc',$meta_desc)
+            ->with('meta_keywords',$meta_keywords)
+            ->with('meta_title',$meta_title)
+            ->with('url_canonical',$url_canonical)
+            ->with('slider',$slider);
 
     }
 
@@ -208,18 +229,22 @@ class HomeController extends Controller
 
 
         $details_post = DB::table('tbl_posts')
-//                        ->join('tbl_brand','tbl_brand.brand_id','=','tbl_posts.brand_id')
-//                        ->where('tbl_posts.brand_id',$slug)
+                        ->where('tbl_posts.slug',$slug)
                         ->get();
-        dd($details_post);
-        return view('pages.blog_details',[
+        $hot_news = DB::table('tbl_posts')
+            ->where([['hot_news','1'],['post_status','0']])
+            ->orderby('id','desc')
+            ->get();
+        return view('pages.blog.blog_details',[
             'slider'=>$slider,
             'category'=>$cate_product,
-            'brand'=>$brand_product,
             'meta_desc'=>$meta_desc,
             'meta_keywords'=>$meta_keywords,
             'meta_title'=>$meta_title,
-            'url_canonical'=>$url_canonical
+            'url_canonical'=>$url_canonical,
+            'details_post'=>$details_post,
+            'hot_news'=>$hot_news
+
 
         ]);
     }
@@ -231,6 +256,10 @@ class HomeController extends Controller
         $meta_keywords = "thiết bị cây cảnh,phụ kiện cắt tỉa,đồ dùng nông nghiệp";
         $meta_title = "Phụ kiện,thiết bị cho cây cảnh chính hãng";
         $url_canonical = $request->url();
+        $hot_news = DB::table('tbl_posts')
+            ->where([['hot_news','1'],['post_status','0']])
+            ->orderby('id','desc')
+            ->get();
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         return view('pages.contact')
             ->with('slider',$slider)
@@ -238,9 +267,9 @@ class HomeController extends Controller
             ->with('meta_keywords',$meta_keywords)
             ->with('meta_title',$meta_title)
             ->with('url_canonical',$url_canonical)
+            ->with('hot_news',$hot_news)
+
             ->with('category',$cate_product);
     }
-    public function cart(Request $request){
 
-    }
 }

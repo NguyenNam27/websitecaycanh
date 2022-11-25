@@ -6,26 +6,11 @@
             <div class="col-md-3">
                 <div class="tintuc_left">
                     <p class="tieude">TIN NỔI BẬT</p>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
-                    <div class="tintuc1">
-                        <img class="tieude_img" src="Caycanh/img/tintuc_anh1.png" alt="">
-                        <a href=""><p class="text_tintuc_left">Cây Kim Ngân hợp với tuổi nào?</p></a>
-                        <p class="sanp1"><img class="icon_tintuc" src="Caycanh/img/icon_tintuc1.png" alt="">24/11/2020</p>
-                    </div>
+                    @foreach($hot_news as $new2)
+                        <a href="{{URL::to('/details_post/'.$new2->slug)}}"><img class="tieude_img" src="{{asset('public/uploads/post/'.$new2->image)}}" alt=""></a>
+                        <a href="{{URL::to('/details_post/'.$new2->slug)}}"><p class="text_tintuc_left">{{$new2->title}}</p></a>
+                        <p class="sanp1"><img class="icon_tintuc" src="" alt="">{{$new2->created_at}}</p>
+                    @endforeach
                 </div>
             </div>
 

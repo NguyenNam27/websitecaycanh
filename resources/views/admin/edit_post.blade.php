@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Mô tả bài viết</label>
-                                <textarea style="resize: none"  rows="5" class="form-control" name="short_description" id="ckeditor9" placeholder="Mô tả sản phẩm">{{$edit->short_description}}</textarea>
+                                <textarea style="resize: none"  rows="5" class="form-control" name="short_description" id="ckeditor10" placeholder="Mô tả sản phẩm">{{$edit->short_description}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Từ khoá tìm kiếm</label>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nội dung bài viết</label>
-                                <textarea style="resize: none" rows="8" class="form-control" name="content"  id="id5" placeholder="Nội dung bài viết">{{$edit->content}}</textarea>
+                                <textarea style="resize: none" rows="8" class="form-control" name="content"  id="ckeditor11" placeholder="Nội dung bài viết">{{$edit->content}}</textarea>
                             </div>
 
                             <div class="form-group">
@@ -89,3 +89,4 @@
 
         </div>
 @endsection
+
