@@ -34,7 +34,7 @@
                     </section>
                     <div class="row gt">
                         @foreach($introduce as $value)
-{{--                            {{dd($value->short_description)}}--}}
+{{--                            {{dd($value)}}--}}
                             <div class="new__title">
                                 <h3><strong>{{$value->title}}</strong></h3>
                                 <span><strong>NOTICE</strong></span>
@@ -42,8 +42,8 @@
                                 <span> <strong><i class="fa-regular fa-clock"></i> {{$value->created_at}}</strong></span>
                             </div>
                             <div class="new__info">
-                                {!! strip_tags($value->short_description) !!}
-                                {!! strip_tags($value->content) !!}
+                               <p>{!! $value->short_description !!}</p>
+                               <p>{!! $value->content !!}</p>
 
                             </div>
                         @endforeach
