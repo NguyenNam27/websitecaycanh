@@ -121,7 +121,7 @@
             <div class="tab-content">
                 <div id="thongtinsanpham" class="container tab-pane active"><br>
                     <div>
-                        <p class="text-justify">{!! strip_tags($details->product_content) !!}</p>
+                        <p class="text-justify">{!! $details->product_content !!}</p>
                     </div>
 
                 </div>
@@ -146,7 +146,6 @@
             </div>
         </div>
     </section>
-
     <section class="regular slider container">
         @foreach($related_product as $relate)
             <div class="img-thumbnail">

@@ -41,7 +41,7 @@
                                             <div class="middle">
                                                 <p>{!! strip_tags($all2->product_desc) !!}</p>
                                                 <div class="btn-hover">
-                                                    <a href="{{URL::to('/chi-tiet/'.$all2->product_slug)}}"><button class="btn btn-primary btn-sm">Chi tiêt</button></a>
+                                                    <a href="{{URL::to('/chi-tiet/'.$all2->product_slug)}}"><p class="btn btn-primary btn-sm">Chi tiêt</p></a>
                                                     <button class="btn btn-primary btn-sm">Mua ngay</button>
                                                 </div>
                                             </div>

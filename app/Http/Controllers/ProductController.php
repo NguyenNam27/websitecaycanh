@@ -148,7 +148,10 @@ class ProductController extends Controller
 
         $related_product = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
-        ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_slug',[$product_slug])->orderby(DB::raw('RAND()'))->paginate(6);
+        ->where('tbl_category_product.category_id',$category_id)
+            ->whereNotIn('tbl_product.product_slug',[$product_slug])
+            ->orderby(DB::raw('RAND()'))
+            ->paginate(6);
 
 
         return view('pages.product.show_detail')

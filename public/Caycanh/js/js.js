@@ -1,7 +1,7 @@
 $(document).on('ready', function() {
-		      
+
   $(".regular").slick({
-    
+
   dots: true,
 	infinite: true,
 	speed: 300,
@@ -36,5 +36,5 @@ $(document).on('ready', function() {
 	// instead of a settings object
 	]
   });
- 
+
 });

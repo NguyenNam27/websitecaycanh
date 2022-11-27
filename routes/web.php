@@ -16,6 +16,7 @@ use App\Http\Controllers\BlogController;
 
 use App\Http\Controllers\IntroduceController;
 
+use App\Http\Controllers\CustomerController;
 
 
 
@@ -64,6 +65,10 @@ Route::get('/add-category-product', [CategoryProduct::class, 'add_category_produ
 Route::get('/edit-category-product/{category_product_id}', [CategoryProduct::class, 'edit_category_product']);
 Route::get('/delete-category-product/{category_product_id}', [CategoryProduct::class, 'delete_category_product']);
 Route::get('/all-category-product', [CategoryProduct::class, 'all_category_product']);
+
+// Khách hàng
+Route::get('/all-customer', [CustomerController::class, 'all_customer']);
+Route::get('/delete-customer/{customer_id}', [CustomerController::class, 'delete_customer']);
 
 
 Route::post('/export-csv','CategoryProduct@export_csv');

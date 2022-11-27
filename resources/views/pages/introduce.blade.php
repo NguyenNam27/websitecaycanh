@@ -44,10 +44,8 @@
                             <div class="new__info">
                                <p>{!! $value->short_description !!}</p>
                                <p>{!! $value->content !!}</p>
-
                             </div>
                         @endforeach
-
                     </div>
                 </div>
 

@@ -26,13 +26,13 @@
 
     <link rel="stylesheet" type="text/css" href="Caycanh/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="Caycanh/slick/slick-theme.css">
+
+{{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
+
+    <link rel="stylesheet" href="Caycanh/css/style.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.9/dist/sweetalert2.min.css">
     <link href="Caycanh/css/sweetalert.css" rel="stylesheet">
-
-    {{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
-    <link rel="stylesheet" href="Caycanh/css/style.css">
-    {{--    <link rel="stylesheet" href="Caycanh/css/ChiTietNews.css">--}}
-
 
 </head>
 <body>
@@ -51,7 +51,7 @@
                 $customer_id = Session::get('customer_id');
                 if($customer_id != NULL){
                 ?>
-{{--                <li><a href=""><img src=""> {{ Auth::customer_name }}</a></li>--}}
+                <li><a href=""><img src=""> {{ Auth::customer_name }}</a></li>
                 <li><a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
 
                 <?php
@@ -283,8 +283,7 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
 <script src="Caycanh/slick/slick.js" type="text/javascript" charset="utf-8"></script>
-<script src="Caycanh/js/js.js" type="text/javascript">
-</script>
+<script src="Caycanh/js/js.js" type="text/javascript"></script>
 
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0"
         nonce="O1u2nPsT"></script>
@@ -297,7 +296,16 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.9/dist/sweetalert2.min.js"></script>
 <script src="Caycanh/js/sweetalert.min.js"></script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>--}}
+<script>
+    $(function () {
+        $('.select_form').change(function (){
+            var display= $('.select_form option:selected').text();
+            $('#shipping_address').val(display);
+        });
+    })
 
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -459,15 +467,6 @@
 
 
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script>
-    $(function () {
-        $('.select_form').change(function (){
-            var display= $('.select_form option:selected').text();
-            $('#shipping_address').val(display);
-        });
-    })
 
-</script>
 </body>
 </html>

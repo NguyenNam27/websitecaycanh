@@ -30,8 +30,8 @@
                         <span> <strong><i class="fa-regular fa-clock"></i> {{$details->created_at}}</strong></span>
                     </div>
                     <div class="new__info">
-                        <p>{!! strip_tags($details->short_description) !!}</p>
-                        <p>{!! strip_tags($details->content) !!}</p>
+                        <p>{!! $details->short_description !!}</p>
+                        <p>{!! $details->content !!}</p>
 
                     </div>
                     @endforeach
