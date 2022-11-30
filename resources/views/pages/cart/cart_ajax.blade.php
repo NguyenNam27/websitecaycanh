@@ -130,8 +130,11 @@
                                             @csrf
                                             <input type="text" class="form-control" name="coupon"
                                                    placeholder="Nhập mã giảm giá" style="width: 25%"><br>
-                                            <input type="submit" class="btn btn-default check_coupon"
+                                            <input type="submit" class="btn btn-primary check_coupon"
                                                    name="check_coupon" value="Tính mã giảm giá">
+                                            @if(Session::get('coupon'))
+                                                <a class="btn btn-primary check_out" href="{{url('/unset-coupon')}}">Xóa mã khuyến mãi</a>
+                                            @endif
                                         </form>
                                     </td>
                                 </tr>

@@ -60,9 +60,9 @@
                 <?php
                 }else{
                 ?>
-                <li><a href="{{URL::to('/dang-nhap')}}" title="Đăng nhập"><img src="" alt="Đăng nhập"></a></li>
+                <li><a href="{{URL::to('/dang-nhap')}}" title="Đăng nhập">Đăng Nhập</a></li>
 
-                <li><a href="{{URL::to('/dang-ky')}}" title="Đăng ký"><img src="" alt="Đăng ký"></a></li>
+                <li><a href="{{URL::to('/dang-ky')}}" title="Đăng ký">Đăng Ký</a></li>
                 <?php
                 }
                 ?>
