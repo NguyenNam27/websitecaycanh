@@ -3,19 +3,13 @@
     <link rel="stylesheet" href="Caycanh/css/login.css">
 
     <div class="login-page">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        @if(session()->has('error'))
+            <div class="alert alert-danger">{{session()->get('error')}}</div>
         @endif
         <div class="form">
             <h2>Login</h2>
             <form action="{{URL::to('/login-customer')}}" method="POST" class="login-form" enctype="multipart/form-data">
-                {{csrf_field()}}
+                @csrf
                 <input type="text" name="email_account" placeholder="Tài khoản" />
                 @if($errors->has('email_account'))
                     <label class="Text-red"

@@ -156,29 +156,19 @@ class CheckoutController extends Controller
             ->with('slider',$slider);
     }
     public function login_checkout(Request $request){
-//        $request->validate([
-//            'email_account' => 'required|email',
-//            'password_account' => 'required|alpha',
-//        ],[
-//            'email_account.required'=>'Bạn chưa nhập email',
-//            'email_account.email'=>'Email chưa đúng định dạng',
-//            'password_account.required'=>'Bạn chưa nhập mật khẩu',
-//        ]);
+
+
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
 
-        //seo
         $meta_desc = "Đăng nhập thanh toán";
         $meta_keywords = "Đăng nhập thanh toán";
         $meta_title = "Đăng nhập thanh toán";
         $url_canonical = $request->url();
-        //--seo
-
+//
     	$cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-
+//
     	return view('pages.checkout.login_checkout')
             ->with('category',$cate_product)
-            ->with('brand',$brand_product)
             ->with('meta_desc',$meta_desc)
             ->with('meta_keywords',$meta_keywords)
             ->with('meta_title',$meta_title)
@@ -186,18 +176,39 @@ class CheckoutController extends Controller
             ->with('slider',$slider);
     }
     public function add_customer(Request $request){
+        $rule = [
+            'customer_name'=>'required|min:5',
+            'customer_email'=>'required|email|unique:tbl_customers',
+            'customer_password'=>'required|min:8',
+            'customer_phone'=>'required',
+
+        ];
+        $massage = [
+            'customer_name.required'=>'tên bắt buộc nhập',
+            'customer_name.min'=>'tên không được nho hơn:min',
+            'customer_email.required'=>'email bắt buộc phải nhập',
+            'customer_email.email'=>'email không đúng định dạng',
+            'customer_email.unique'=>'email đã tồn tại',
+            'customer_password.required'=>'mật khẩu bắt buộc phải nhập',
+            'customer_password.min'=>'mật khẩu không đc nhỏ hơn :min',
+            'customer_phone.required'=>'Số điện thoại bắt buộc nhập',
+
+        ];
+
+        $request->validate($rule,$massage);
 
     	$data = array();
     	$data['customer_name'] = $request->customer_name;
     	$data['customer_phone'] = $request->customer_phone;
     	$data['customer_email'] = $request->customer_email;
     	$data['customer_password'] = md5($request->customer_password);
-    	$customer_id = DB::table('tbl_customers')->insertGetId($data);
+        Session()->flash('success','Đăng ký thành Công');
+        $customer_id = DB::table('tbl_customers')->insertGetId($data);
         Session::put('customer_id',$customer_id);
         Session::put('customer_name',$request->customer_name);
-
-
-    	return Redirect::to('/checkout');
+        Session::put('customer_email',$request->customer_email);
+        Session::put('customer_phone',$request->customer_phone);
+        return Redirect::to('/checkout');
 
 
     }
@@ -250,6 +261,19 @@ class CheckoutController extends Controller
     	return Redirect::to('/dang-nhap');
     }
     public function login_customer(Request $request){
+        $rule = [
+            'email_account' => 'required|email',
+            'password_account' => 'required|',
+        ];
+
+        $massage = [
+            'email_account.required'=>'Bạn chưa nhập email',
+            'email_account.email'=>'Email chưa đúng định dạng',
+            'password_account.required'=>'Bạn chưa nhập mật khẩu',
+        ];
+
+        $request->validate($rule,$massage);
+
     	$email = $request->email_account;
     	$password = md5($request->password_account);
 
@@ -258,8 +282,10 @@ class CheckoutController extends Controller
             ->first();
     	if($result){
     		Session::put('customer_id',$result->customer_id);
+            Session()->flash('success','Đăng nhập thành Công');
     		return Redirect::to('/checkout');
     	}else{
+            Session()->flash('error','Đăng nhập thất bại');
     		return Redirect::to('/dang-nhap');
     	}
         Session::save();

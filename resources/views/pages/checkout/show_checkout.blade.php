@@ -18,14 +18,16 @@
 
 
                 <div class="col-md-9 mg-gthieu">
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">{{session()->get('success')}}</div>
+                    @endif
                     <div class="row title-product ">
-
                         <div class="col-md-3 col-8 title-product1">
                             Giỏ hàng
                             <img src="Caycanh/img/icon_section1.png" alt="" class="icon-arrow">
                         </div>
-
                     </div>
+
                     <div class="row tab_cart">
                         <div class="col-md-12 col-12">
                             <h3 style="margin-bottom: 30px">Giỏ hàng của bạn</h3>
@@ -211,19 +213,25 @@
                             <div>
                                 <br>
                                 <h3 style="margin-bottom: 50px;text-align: center">THÔNG TIN ĐẶT HÀNG</h3>
+                                <?php
+                                $customer_name = Session::get('customer_name');
+                                $customer_email = Session::get('customer_email');
+                                $customer_phone = Session::get('customer_phone');
+
+                                ?>
                                 <form method="POST">
                                     @csrf
                                     <div class="form-group row">
-                                        <label for="name" class="col-sm-2 form-control-label">Họ tên</label>
+                                        <label for="name"  class="col-sm-2 form-control-label">Họ tên</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control shipping_name" name="shipping_name"
+                                            <input type="text" value="{{$customer_name}}" class="form-control shipping_name" name="shipping_name"
                                                    placeholder="Nhập đầy đủ họ tên..." required="">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 form-control-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control shipping_email"
+                                            <input type="email" value="{{$customer_email}}" class="form-control shipping_email"
                                                    name="shipping_email"
                                                    placeholder="Email">
                                         </div>
@@ -231,7 +239,7 @@
                                     <div class="form-group row">
                                         <label for="phone" class="col-sm-2 form-control-label">Điện thoại</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control shipping_phone"
+                                            <input type="number" value="{{$customer_phone}}" class="form-control shipping_phone"
                                                    name="shipping_phone"
                                                    placeholder="Điện thoại">
                                         </div>
@@ -241,7 +249,8 @@
                                     <div class="form-group row">
                                         <label for="address" class="col-sm-2 form-control-label">Địa chỉ</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="shipping_address" readonly="readonly" class="form-control shipping_address"
+                                            <input type="text" id="shipping_address" readonly="readonly"
+                                                   class="form-control shipping_address"
                                                    name="shipping_address" placeholder=" Địa chỉ">
                                         </div>
                                     </div>

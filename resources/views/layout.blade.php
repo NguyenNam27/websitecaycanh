@@ -38,8 +38,8 @@
 <body>
 <section id="vt-top" class="container-fluid ">
     <div class="row">
-        <div class="col-md-12 ">
-            <ul class="">
+        <div class="col-md-12">
+             <ul class="">
                 <li><a href="tel:0395139875" title="Phone"><img src="Caycanh/img/phone.png" alt="Phone">
                         <span>Hotline:</span>
                         <span class="phone1">0395.139.875</span>
@@ -48,10 +48,13 @@
                 {{--                <li><a href="" title="Twitter"><img src="Caycanh/img/t.png" alt="Twitter"></a></li>--}}
 
                 <?php
+
                 $customer_id = Session::get('customer_id');
-                if($customer_id != NULL){
+                $customer_name = Session::get('customer_name');
+
+                if($customer_id != NULL && $customer_name !=NULL){
                 ?>
-                <li><a href=""><img src=""> {{ Auth::customer_name }}</a></li>
+                <li><a href=""><img src=""> Xin chào: {{$customer_name}}</a></li>
                 <li><a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
 
                 <?php
