@@ -280,6 +280,7 @@ class CheckoutController extends Controller
         $result = DB::table('tbl_customers')
             ->where([['customer_email',$email],['customer_password',$password]])
             ->first();
+        
     	if($result){
     		Session::put('customer_id',$result->customer_id);
             Session()->flash('success','Đăng nhập thành Công');
