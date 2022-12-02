@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2022 at 05:38 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.30
+-- Generation Time: Dec 02, 2022 at 03:02 PM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `shopcaycanhlaravel`
+-- Database: `websitecaycanh`
 --
 
 -- --------------------------------------------------------
@@ -228,9 +228,9 @@ CREATE TABLE `tbl_coupon` (
 
 INSERT INTO `tbl_coupon` (`coupon_id`, `coupon_name`, `coupon_time`, `coupon_condition`, `coupon_number`, `coupon_code`, `created_at`, `updated_at`) VALUES
 (1, 'Giảm giá 30/4', 10, 1, 10, 'HDH375Y', NULL, NULL),
-(6, 'Giảm giá Covid', 10, 2, 200000, 'COVID99', NULL, NULL),
-(9, 'Giảm giá 11/11', 3, 2, 50000, 'HA01010', NULL, NULL),
-(10, 'Giảm giá 22/11', 3, 2, 30000, 'MA2211', NULL, NULL);
+(6, 'Giảm giá Covid', 10, 2, 20000, 'COVID99', NULL, NULL),
+(9, 'Giảm giá 11/11', 3, 2, 10000, 'HA01010', NULL, NULL),
+(12, 'Giảm giá 1/5', 2, 1, 10, 'HA0105', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -253,7 +253,11 @@ CREATE TABLE `tbl_customers` (
 --
 
 INSERT INTO `tbl_customers` (`customer_id`, `customer_name`, `customer_email`, `customer_password`, `customer_phone`, `created_at`, `updated_at`) VALUES
-(32, 'Nguyen Nguyen', 'nguyenngocnam00770@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0975720527', '2022-11-25 11:55:00', '2022-11-25 11:55:00');
+(32, 'Nguyen Nguyen', 'nguyenngocnam00770@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0975720527', '2022-11-25 11:55:00', '2022-11-25 11:55:00'),
+(33, 'Nguyen Nguyen22', 'nguyenngocnam007722@gmail.com', '25d55ad283aa400af464c76d713c07ad', '0566762451', '2022-11-30 12:12:51', '2022-11-30 12:12:51'),
+(34, 'Nguyen Nguyen22332', 'nguyenngocnam0077111@gmail.com', '25d55ad283aa400af464c76d713c07ad', '0566762451', '2022-11-30 15:22:40', '2022-11-30 15:22:40'),
+(35, 'Nguyen Nguyen23223', 'nguyenngocnam00772322@gmail.com', '25f9e794323b453885f5181f1b624d0b', '0566762451', '2022-11-30 15:55:56', '2022-11-30 15:55:56'),
+(36, 'hoangnv', 'hoangnv@gmail.com', '25d55ad283aa400af464c76d713c07ad', '0975720527', '2022-12-02 13:23:03', '2022-12-02 13:23:03');
 
 -- --------------------------------------------------------
 
@@ -334,7 +338,8 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`order_id`, `customer_id`, `shipping_id`, `order_status`, `order_code`, `created_at`, `updated_at`) VALUES
-(26, 32, 28, 2, '7c5b3', '2022-11-25 12:03:47', NULL);
+(26, 32, 28, 2, '7c5b3', '2022-11-25 12:03:47', NULL),
+(27, 35, 29, 2, '7cf90', '2022-11-30 15:57:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -361,7 +366,9 @@ CREATE TABLE `tbl_order_details` (
 
 INSERT INTO `tbl_order_details` (`order_details_id`, `order_code`, `product_id`, `product_name`, `product_price`, `product_sales_quantity`, `product_coupon`, `product_feeship`, `created_at`, `updated_at`) VALUES
 (64, '7c5b3', 9, 'Cây lan ý', '450000', 2, 'MA2211', '30000', NULL, NULL),
-(65, '7c5b3', 17, 'Cây phát lộc', '29500', 2, 'MA2211', '30000', NULL, NULL);
+(65, '7c5b3', 17, 'Cây phát lộc', '29500', 2, 'MA2211', '30000', NULL, NULL),
+(66, '7cf90', 15, 'Cây trầu bà', '145000', 2, 'HDH375Y', '30000', NULL, NULL),
+(67, '7cf90', 40, 'Cây kim tiền', '240000', 3, 'HDH375Y', '30000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -427,7 +434,7 @@ INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_quantity`, `pr
 (10, 'Cây ngọc ngân', '100', NULL, 'cay-ngoc-ngan', 6, 25, '<p><em><strong>C&acirc;y ngọc ng&acirc;n</strong></em></p>', '<h3><em><strong>C&acirc;y ngọc ng&acirc;n</strong></em></h3>', '125000', 'anh257.png', 0, 0, NULL, NULL),
 (13, 'Cây phú quý', '100', NULL, 'cay-phu-quy', 6, 25, '<p><em><strong>C&acirc;y ph&uacute; qu&yacute;</strong></em></p>', '<p>C&acirc;y ph&uacute; qu&yacute; l&agrave; dạng c&acirc;y trồng trong nh&agrave; c&oacute; sự lọc kh&iacute; rất tốt, c&aacute;c chất độc hại, chất bụi từ b&ecirc;n ngo&agrave;i được c&acirc;y thanh lọc rất tốt. Từ đ&oacute; mang về cho kh&ocirc;ng gian nh&agrave; bạn trong l&agrave;nh v&agrave; tươi m&aacute;t.</p>\r\n\r\n<p><img alt=\"cay-xanh-trong-nha_214\" height=\"600\" sizes=\"(max-width: 600px) 100vw, 600px\" src=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_214.jpg\" srcset=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_214.jpg 600w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_214-150x150.jpg 150w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_214-300x300.jpg 300w\" width=\"600\" /></p>', '138000', 'anh219.png', 0, 0, NULL, NULL),
 (14, 'Cây trầu bà 2', '60', NULL, 'cay-trau-ba-2', 3, 25, '<p>C&acirc;y trầu b&agrave;</p>', '<p>C&acirc;y trầu b&agrave; c&oacute; l&aacute; h&igrave;nh tim m&agrave;u xanh thẫm rất m&aacute;t mắt, g&acirc;n l&aacute; m&agrave;u v&agrave;ng đ&ocirc;i khi l&agrave; m&agrave;u kem. C&acirc;y trầu b&agrave; l&agrave; loại c&acirc;y leo rất dễ trồng v&agrave; chăm s&oacute;c. Th&iacute;ch hợp để treo ở g&oacute;c ph&ograve;ng hoặc cửa sổ đảm bảo ng&ocirc;i nh&agrave; của bạn sẽ sinh động v&agrave; gần gũi với tự nhi&ecirc;n hơn rất nhiều đấy.</p>\r\n\r\n<p><img alt=\"Cây trầu bà có lá hình tim màu xanh thẫm rất mát mắt, gân lá màu vàng đôi khi là màu kem\" height=\"650\" sizes=\"(max-width: 650px) 100vw, 650px\" src=\"https://nhadepso.com/wp-content/uploads/2017/05/caytrauba.jpg\" srcset=\"https://nhadepso.com/wp-content/uploads/2017/05/caytrauba.jpg 650w, https://nhadepso.com/wp-content/uploads/2017/05/caytrauba-300x300.jpg 300w\" title=\"[10 loại] Cây cảnh trang trí nhà đẹp ngỡ ngàng 20\" width=\"650\" /></p>\r\n\r\n<p>&nbsp;</p>', '135000', 'tnb326.png', 0, 0, NULL, NULL),
-(15, 'Cây trầu bà', '60', NULL, 'cay-trau-ba', 3, 25, '<p>C&acirc;y trầu b&agrave;</p>', '<p>C&acirc;y trầu b&agrave; c&oacute; l&aacute; h&igrave;nh tim m&agrave;u xanh thẫm rất m&aacute;t mắt, g&acirc;n l&aacute; m&agrave;u v&agrave;ng đ&ocirc;i khi l&agrave; m&agrave;u kem. C&acirc;y trầu b&agrave; l&agrave; loại c&acirc;y leo rất dễ trồng v&agrave; chăm s&oacute;c. Th&iacute;ch hợp để treo ở g&oacute;c ph&ograve;ng hoặc cửa sổ đảm bảo ng&ocirc;i nh&agrave; của bạn sẽ sinh động v&agrave; gần gũi với tự nhi&ecirc;n hơn rất nhiều đấy.</p>\r\n\r\n<p><img alt=\"Cây trầu bà có lá hình tim màu xanh thẫm rất mát mắt, gân lá màu vàng đôi khi là màu kem\" height=\"650\" sizes=\"(max-width: 650px) 100vw, 650px\" src=\"https://nhadepso.com/wp-content/uploads/2017/05/caytrauba.jpg\" srcset=\"https://nhadepso.com/wp-content/uploads/2017/05/caytrauba.jpg 650w, https://nhadepso.com/wp-content/uploads/2017/05/caytrauba-300x300.jpg 300w\" title=\"[10 loại] Cây cảnh trang trí nhà đẹp ngỡ ngàng 20\" width=\"650\" /></p>\r\n\r\n<p>&nbsp;</p>', '145000', 'anh266.png', 1, 0, NULL, NULL),
+(15, 'Cây trầu bà', '58', 2, 'cay-trau-ba', 3, 25, '<p>C&acirc;y trầu b&agrave;</p>', '<p>C&acirc;y trầu b&agrave; c&oacute; l&aacute; h&igrave;nh tim m&agrave;u xanh thẫm rất m&aacute;t mắt, g&acirc;n l&aacute; m&agrave;u v&agrave;ng đ&ocirc;i khi l&agrave; m&agrave;u kem. C&acirc;y trầu b&agrave; l&agrave; loại c&acirc;y leo rất dễ trồng v&agrave; chăm s&oacute;c. Th&iacute;ch hợp để treo ở g&oacute;c ph&ograve;ng hoặc cửa sổ đảm bảo ng&ocirc;i nh&agrave; của bạn sẽ sinh động v&agrave; gần gũi với tự nhi&ecirc;n hơn rất nhiều đấy.</p>\r\n\r\n<p><img alt=\"Cây trầu bà có lá hình tim màu xanh thẫm rất mát mắt, gân lá màu vàng đôi khi là màu kem\" height=\"650\" sizes=\"(max-width: 650px) 100vw, 650px\" src=\"https://nhadepso.com/wp-content/uploads/2017/05/caytrauba.jpg\" srcset=\"https://nhadepso.com/wp-content/uploads/2017/05/caytrauba.jpg 650w, https://nhadepso.com/wp-content/uploads/2017/05/caytrauba-300x300.jpg 300w\" title=\"[10 loại] Cây cảnh trang trí nhà đẹp ngỡ ngàng 20\" width=\"650\" /></p>\r\n\r\n<p>&nbsp;</p>', '145000', 'anh266.png', 1, 0, NULL, NULL),
 (16, 'Cây lô hội', '70', NULL, 'cay-lo-hoi', 3, 25, '<p>C&acirc;y l&ocirc; hội</p>', '<p><strong>C&acirc;y l&ocirc; hội</strong>&nbsp;hay&nbsp;<strong>nha đam</strong>&nbsp;l&agrave; lo&agrave;i c&acirc;y rất tốt cho l&agrave;n da thường được sử dụng l&agrave;m&nbsp;<strong>c&acirc;y cảnh trang tr&iacute;</strong>&nbsp;trong gia đ&igrave;nh. Ng&ocirc;i nh&agrave; đẹp hơn tr&ocirc;ng thấy khi bạn biết đặt chậu c&acirc;y l&ocirc; hội đ&uacute;ng chỗ. V&igrave; thuộc d&ograve;ng xương rồng n&ecirc;n c&acirc;y l&ocirc; hội rất dễ chăm s&oacute;c, kh&ocirc;ng cần mất qu&aacute; nhiều thời gian v&agrave; c&ocirc;ng sức m&agrave; em ấy vẫn sinh trưởng tốt.</p>\r\n\r\n<p><img alt=\"Cây lô hội hay nha đam là loài cây rất tốt cho làn da thường được sử dụng làm cây cảnh trang trí trong gia đình\" height=\"851\" sizes=\"(max-width: 650px) 100vw, 650px\" src=\"https://nhadepso.com/wp-content/uploads/2017/05/caylohoi.jpg\" srcset=\"https://nhadepso.com/wp-content/uploads/2017/05/caylohoi.jpg 650w, https://nhadepso.com/wp-content/uploads/2017/05/caylohoi-300x393.jpg 300w\" title=\"[10 loại] Cây cảnh trang trí nhà đẹp ngỡ ngàng 19\" width=\"650\" /></p>\r\n\r\n<p>&nbsp;</p>', '195000', 'anh29.png', 0, 0, NULL, NULL),
 (17, 'Cây phát lộc', '78', 2, 'cay-phat-loc', 3, 25, '<p>C&acirc;y ph&aacute;t lộc</p>', '<p>C&acirc;y ph&aacute;t lộc đặc biệt ở điểm kh&ocirc;ng cần đất vẫn c&oacute; thể sinh trưởng tốt. Trồng c&acirc;y ph&aacute;t lộc như kiểu cắm hoa v&agrave;o nước vậy, bạn c&oacute; thể biến tấu chậu c&acirc;y ph&aacute;t lộc bằng c&aacute;ch rải th&ecirc;m đ&aacute; hoặc c&aacute;c đồ d&ugrave;ng trang tr&iacute; kh&aacute;c v&agrave;o chậu c&acirc;y rồi đặt một g&oacute;c n&agrave;o đ&oacute; trong nh&agrave; để th&ecirc;m xinh. Chỉ cần nhớ thay nước sạch cho c&acirc;y mỗi tuần l&agrave; c&acirc;y sẽ ph&aacute;t triển tươi tốt m&agrave; kh&ocirc;ng cần phải mất qu&aacute; nhiều c&ocirc;ng sức chăm b&oacute;n. Người kinh doanh, bu&ocirc;n b&aacute;n thường đặt c&acirc;y ph&aacute;t lộc tại shop cửa h&agrave;ng của m&igrave;nh v&agrave; được bố tr&iacute; từ kh&acirc;u&nbsp;<a href=\"https://nhadepso.com/thiet-ke-shop\" rel=\"noopener noreferrer\" target=\"_blank\">thiết kế cửa h&agrave;ng</a>, gi&uacute;p việc kinh doanh thuận lợi, ph&aacute;t đạt.</p>\r\n\r\n<p><img alt=\"Cây phát lộc là loại cây cảnh trang trí nhà rất phù hợp\" height=\"586\" sizes=\"(max-width: 650px) 100vw, 650px\" src=\"https://nhadepso.com/wp-content/uploads/2017/05/cayphatloc.jpg\" srcset=\"https://nhadepso.com/wp-content/uploads/2017/05/cayphatloc.jpg 650w, https://nhadepso.com/wp-content/uploads/2017/05/cayphatloc-300x270.jpg 300w\" title=\"[10 loại] Cây cảnh trang trí nhà đẹp ngỡ ngàng 18\" width=\"650\" /></p>\r\n\r\n<p>&nbsp;</p>', '29500', 'anh184.png', 1, 0, NULL, NULL),
 (18, 'Cây xương rồng tai thỏ', '80', NULL, 'cay-xuong-rong-tai-tho', 3, 25, '<p>C&acirc;y xương rồng tai thỏ</p>', '<p>T&ecirc;n gọi của lo&agrave;i c&acirc;y xương rồng n&agrave;y xuất ph&aacute;t từ h&igrave;nh d&aacute;ng những chiếc l&aacute; của n&oacute;. Xương rồng v&ocirc; c&ugrave;ng dễ trồng, dễ chăm s&oacute;c lại l&agrave; vật trang tr&iacute; nh&agrave; đẹp nhưng bạn n&ecirc;n cẩn thận những chiếc gai nhọn xung quanh lo&agrave;i c&acirc;y n&agrave;y nh&eacute;!</p>\r\n\r\n<p><img alt=\"Cây xương rồng tai thỏ\" height=\"869\" sizes=\"(max-width: 650px) 100vw, 650px\" src=\"https://nhadepso.com/wp-content/uploads/2017/05/cayxuongrong.jpg\" srcset=\"https://nhadepso.com/wp-content/uploads/2017/05/cayxuongrong.jpg 650w, https://nhadepso.com/wp-content/uploads/2017/05/cayxuongrong-300x401.jpg 300w\" title=\"[10 loại] Cây cảnh trang trí nhà đẹp ngỡ ngàng 17\" width=\"650\" /></p>\r\n\r\n<p>&nbsp;</p>', '39500', 'anh227.png', 1, 0, NULL, NULL),
@@ -441,7 +448,7 @@ INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_quantity`, `pr
 (37, 'Cây thanh lan', '05', NULL, 'cay-thanh-lan', 5, 25, '<p><em><strong>C&acirc;y thanh lan</strong></em></p>', '<p>C&acirc;y thanh lan l&agrave; một trong những loại&nbsp;<strong><a href=\"https://thietkesanvuonviet.com/20-loai-cay-xanh-trong-nha-de-trong-lam-noi-bat-khong-gian-noi-that/\">c&acirc;y xanh trong nh&agrave;</a></strong>&nbsp;c&oacute; khả năng thanh lọc kh&ocirc;ng kh&iacute; rất tốt.</p>\r\n\r\n<ul>\r\n	<li>C&acirc;y thanh lan h&uacute;t được kh&iacute; acmoniac,CO2,&hellip;vv đem đến bầu kh&ocirc;ng kh&iacute; trong l&agrave;nh.</li>\r\n	<li>Ngo&agrave;i ra c&acirc;y thanh lan rất &iacute;t s&acirc;u bệnh hại, dễ chăm s&oacute;c, kh&ocirc;ng tốn qu&aacute; nhiều c&ocirc;ng chăm s&oacute;c.</li>\r\n	<li>C&acirc;y xanh trong nh&agrave; n&agrave;y c&oacute; khả năng l&agrave;m m&aacute;t m&ocirc;i trường xung quanh rất tốt, giảm bớt nhiệt độ trong nh&agrave; v&agrave;o m&ugrave;a nắng. V&igrave; thế m&agrave; c&acirc;y được chọn trồng nhiều trong nh&agrave;.</li>\r\n</ul>\r\n\r\n<p><img alt=\"cay-xanh-trong-nha_16\" height=\"344\" sizes=\"(max-width: 600px) 100vw, 600px\" src=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_16.jpg\" srcset=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_16.jpg 600w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_16-300x172.jpg 300w\" width=\"600\" /></p>', '70000', 'anh232.png', 0, 0, '2021-09-30 07:35:43', '2021-10-09 09:54:49'),
 (38, 'Cây thiết mộc lan', '10', NULL, 'cay-thiet-moc-lan', 5, 25, '<p><em><strong>C&acirc;y thiết mộc lan</strong></em></p>', '<h3>&nbsp;</h3>\r\n\r\n<p>Thiết mộc lan thường được trồng l&agrave;m c&acirc;y xanh trong nh&agrave;, đặt ở g&oacute;c nh&agrave;, ch&acirc;n cầu thang, ph&ograve;ng kh&aacute;ch&hellip;.vv để l&agrave;m c&acirc;y phong thủy trang tr&iacute; cho ng&ocirc;i nh&agrave;.</p>\r\n\r\n<ul>\r\n	<li>Thiết mộc lan l&agrave; c&acirc;y c&oacute; th&acirc;n cao tr&ograve;n, h&igrave;nh trụ, c&aacute;c l&aacute; của c&acirc;y d&agrave;i thu&ocirc;n, nhọn ở đầu l&aacute;. Nh&igrave;n l&aacute; tu&ocirc;n xuống mượt tr&ocirc;ng rất m&aacute;t mắt v&agrave; mới lạ.</li>\r\n	<li>C&acirc;y c&oacute; khả năng sinh trưởng tốt trong m&ocirc;i trường thiếu &aacute;nh s&aacute;ng mặt trời chiếu s&aacute;ng trực tiếp.</li>\r\n	<li>C&acirc;y thiết mộc lan mang đến cho căn nh&agrave; của bạn sự tươi mới, m&agrave;u xanh của thi&ecirc;n nhi&ecirc;n, tạo cho kh&ocirc;ng gian xung quanh cực kỳ m&aacute;t mẻ v&agrave; l&agrave;m cho ch&uacute;ng ta được thoải m&aacute;i.</li>\r\n</ul>\r\n\r\n<p><img alt=\"cay-xanh-trong-nha_15\" height=\"518\" sizes=\"(max-width: 600px) 100vw, 600px\" src=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_15.jpg\" srcset=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_15.jpg 600w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_15-300x259.jpg 300w\" width=\"600\" /></p>\r\n\r\n<h3>&nbsp;</h3>', '58000', 'anh175.png', 0, 0, '2021-09-30 09:18:52', '2021-09-30 09:18:52'),
 (39, 'Cây kim ngân – cây xanh trong nhà đẹp', '10', NULL, 'cay-kim-ngan-–-cay-xanh-trong-nha-dep', 1, 25, '<p><em><strong>C&acirc;y kim ng&acirc;n &ndash; c&acirc;y xanh trong nh&agrave; đẹp</strong></em></p>', '<p>C&acirc;y kim ng&acirc;n l&agrave; c&acirc;y trồng trong nh&agrave; được nhiều gia đ&igrave;nh lựa chọn trang tr&iacute; cho kh&ocirc;ng gian nội thất của m&igrave;nh.</p>\r\n\r\n<ul>\r\n	<li>C&acirc;y kim ng&acirc;n c&oacute; h&igrave;nh d&aacute;ng b&ecirc;n ngo&agrave;i vững chắc, th&acirc;n gốc gỗ như cột trụ biểu trưng cho gia đ&igrave;nh.</li>\r\n	<li>L&aacute; của kim ng&acirc;n dạng 5 c&aacute;nh sao vươn ra như chiếc &ocirc;, che chắn cho gia đ&igrave;nh.</li>\r\n	<li>C&acirc;y kim ng&acirc;n l&agrave; sự lựa chọn của nhiều gia đ&igrave;nh, bởi loại c&acirc;y xanh trong nh&agrave; n&agrave;y mang lại may mắn cho gia đ&igrave;nh, t&agrave;i lộc v&agrave; sự bền vững cho sự thịnh vượng của gia đ&igrave;nh.</li>\r\n</ul>\r\n\r\n<p><img alt=\"cay-xanh-trong-nha_14\" height=\"380\" sizes=\"(max-width: 600px) 100vw, 600px\" src=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_14.jpg\" srcset=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_14.jpg 600w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_14-300x190.jpg 300w\" width=\"600\" /></p>', '300000', 'tnb353.png', 0, 0, '2021-09-30 09:23:07', '2021-09-30 09:23:07'),
-(40, 'Cây kim tiền', '10', NULL, 'cay-kim-tien', 1, 25, '<h3><em><strong>C&acirc;y kim tiền</strong></em></h3>', '<p>&nbsp;</p>\r\n\r\n<p>C&acirc;y kim tiền được biết đến l&agrave; c&acirc;y được hầu hết tất cả c&aacute;c gia đ&igrave;nh đều y&ecirc;u th&iacute;ch v&agrave; chọn l&agrave;m c&acirc;y trồng trong nh&agrave;.&nbsp;C&acirc;y kim tiền c&oacute; ưu điểm l&agrave; sống được trong m&ocirc;i trường trong nh&agrave;, c&acirc;y ưa b&oacute;ng, c&oacute; sức sinh trưởng v&agrave; ph&aacute;t triển tốt trong m&ocirc;i trường thiếu &aacute;nh s&aacute;ng mặt trời chiếu trực tiếp.</p>\r\n\r\n<ul>\r\n	<li>C&acirc;y kim tiền l&agrave; c&acirc;y xanh trong nh&agrave; cho l&aacute; m&agrave;u xanh mướt, c&aacute;c l&aacute; mọc đối diện nhau tr&ecirc;n một c&agrave;nh l&aacute; d&agrave;i từ dưới gốc mọc l&ecirc;n. Tr&ocirc;ng rất bắt mắt v&agrave; tươi xanh.</li>\r\n	<li>C&acirc;y kim tiền l&agrave; c&acirc;y phong thủy mang đến tiền t&agrave;i, may mắn, ph&uacute; qu&yacute; v&agrave; thịnh vượng.</li>\r\n	<li>C&acirc;y thường được mọi người đặt tại ph&ograve;ng kh&aacute;ch của căn nh&agrave;, nới ch&iacute;nh diện của căn nh&agrave;.</li>\r\n</ul>\r\n\r\n<p><img alt=\"cay-xanh-trong-nha_13\" height=\"400\" sizes=\"(max-width: 600px) 100vw, 600px\" src=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_13.jpg\" srcset=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_13.jpg 600w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_13-300x200.jpg 300w\" width=\"600\" /></p>', '240000', 'anh227.png', 1, 0, '2021-09-30 09:29:46', '2021-09-30 09:29:46'),
+(40, 'Cây kim tiền', '7', 3, 'cay-kim-tien', 1, 25, '<h3><em><strong>C&acirc;y kim tiền</strong></em></h3>', '<p>&nbsp;</p>\r\n\r\n<p>C&acirc;y kim tiền được biết đến l&agrave; c&acirc;y được hầu hết tất cả c&aacute;c gia đ&igrave;nh đều y&ecirc;u th&iacute;ch v&agrave; chọn l&agrave;m c&acirc;y trồng trong nh&agrave;.&nbsp;C&acirc;y kim tiền c&oacute; ưu điểm l&agrave; sống được trong m&ocirc;i trường trong nh&agrave;, c&acirc;y ưa b&oacute;ng, c&oacute; sức sinh trưởng v&agrave; ph&aacute;t triển tốt trong m&ocirc;i trường thiếu &aacute;nh s&aacute;ng mặt trời chiếu trực tiếp.</p>\r\n\r\n<ul>\r\n	<li>C&acirc;y kim tiền l&agrave; c&acirc;y xanh trong nh&agrave; cho l&aacute; m&agrave;u xanh mướt, c&aacute;c l&aacute; mọc đối diện nhau tr&ecirc;n một c&agrave;nh l&aacute; d&agrave;i từ dưới gốc mọc l&ecirc;n. Tr&ocirc;ng rất bắt mắt v&agrave; tươi xanh.</li>\r\n	<li>C&acirc;y kim tiền l&agrave; c&acirc;y phong thủy mang đến tiền t&agrave;i, may mắn, ph&uacute; qu&yacute; v&agrave; thịnh vượng.</li>\r\n	<li>C&acirc;y thường được mọi người đặt tại ph&ograve;ng kh&aacute;ch của căn nh&agrave;, nới ch&iacute;nh diện của căn nh&agrave;.</li>\r\n</ul>\r\n\r\n<p><img alt=\"cay-xanh-trong-nha_13\" height=\"400\" sizes=\"(max-width: 600px) 100vw, 600px\" src=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_13.jpg\" srcset=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_13.jpg 600w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_13-300x200.jpg 300w\" width=\"600\" /></p>', '240000', 'anh227.png', 1, 0, '2021-09-30 09:29:46', '2021-09-30 09:29:46'),
 (41, 'Cây sống đời', '9', 1, 'cay-song-doi', 5, 25, '<p><em><strong>C&acirc;y sống đời</strong></em></p>', '<p><em><strong>C&acirc;y sống đời</strong></em></p>', '110000', 'anh172.png', 1, 0, '2021-09-30 09:31:48', '2021-09-30 09:31:48'),
 (42, 'Cây lưỡi hổ', '10', NULL, 'cay-luoi-ho', 5, 25, '<p><em><strong>C&acirc;y lưỡi hổ</strong></em></p>', '<p>Lưỡi hổ l&agrave; một trong những loại c&acirc;y xanh trong nh&agrave; th&acirc;n thuộc với người d&acirc;n Việt. Bởi c&acirc;y được mọi người trồng nhiều, v&agrave; rất được ưa chuộng.</p>\r\n\r\n<ul>\r\n	<li>C&acirc;y lưỡi hổ l&agrave; c&acirc;y cho vẻ đẹp từ những chiếc l&aacute;, những chiếc l&aacute; mọng nước v&agrave; c&oacute; m&agrave;u xanh pha lẫn c&aacute;c đường vằn rất độc đ&aacute;o v&agrave; lạ mắt.</li>\r\n	<li>C&acirc;y lưỡi hổ c&ograve;n l&agrave; một trong những c&acirc;y được nasa khuy&ecirc;n d&ugrave;ng l&agrave;m c&acirc;y trang tr&iacute; trong nh&agrave;. V&igrave; c&acirc;y c&oacute; khả năng thu h&uacute;t c&aacute;c chất kh&iacute; độc hại, c&aacute;c kh&iacute; được thải ra từ c&aacute;c thiết bị điện tử, từ gỗ&hellip;vv. Nhờ đ&oacute; trồng c&acirc;y lưỡi hổ l&agrave;m trồng trong nh&agrave; mang đến nguồn kh&ocirc;ng kh&iacute; cho căn nh&agrave; của bạn được tươi m&aacute;t v&agrave; trong l&agrave;nh.</li>\r\n</ul>', '320000', 'tnb17.png', 0, 0, '2021-09-30 09:43:28', '2021-09-30 09:43:28'),
 (43, 'Cây phát lộc hoa', '10', NULL, 'cay-phat-loc-hoa', 5, 25, '<p><em><strong>C&acirc;y ph&aacute;t lộc hoa</strong></em></p>', '<p>C&acirc;y ph&aacute;t lộc l&agrave; c&acirc;y xanh trong nh&agrave; mang đến lo&agrave;i hoa rất đẹp v&agrave; &yacute; nghĩa. C&acirc;y được mọi người chọn l&agrave;m c&acirc;y trồng trong nh&agrave;, mang đến vẻ đẹp tự nhi&ecirc;n, kh&ocirc;ng qu&aacute; m&agrave;u m&egrave;, nhưng đơn giản v&agrave; sang trọng.&nbsp;C&acirc;y l&agrave; sự hiện th&acirc;n của t&agrave;i lộc, su&ocirc;n sẻ v&agrave; may mắn.</p>\r\n\r\n<p><img alt=\"cay-xanh-trong-nha_211\" height=\"605\" sizes=\"(max-width: 600px) 100vw, 600px\" src=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_211.jpg\" srcset=\"https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_211.jpg 600w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_211-150x150.jpg 150w, https://thietkesanvuonviet.com/wp-content/uploads/2019/12/cay-xanh-trong-nha_211-298x300.jpg 298w\" width=\"600\" /></p>', '30000', 'tnb261.png', 0, 0, '2021-09-30 09:45:59', '2021-09-30 09:45:59'),
@@ -1234,7 +1241,8 @@ CREATE TABLE `tbl_shipping` (
 --
 
 INSERT INTO `tbl_shipping` (`shipping_id`, `shipping_name`, `shipping_address`, `shipping_phone`, `shipping_email`, `shipping_notes`, `shipping_method`, `created_at`, `updated_at`) VALUES
-(28, 'Nam11', 'Thành phố Hà NộiQuận Ba ĐìnhPhường Phúc Xá', '0566762451', 'nguyenngocnam00770@gmail.com', 'giư nhanh', 1, NULL, NULL);
+(28, 'Nam11', 'Thành phố Hà NộiQuận Ba ĐìnhPhường Phúc Xá', '0566762451', 'nguyenngocnam00770@gmail.com', 'giư nhanh', 1, NULL, NULL),
+(29, 'Nguyen Nguyen23223', 'Thành phố Hà NộiQuận Ba ĐìnhPhường Phúc Xá', '0566762451', 'nguyenngocnam00772322@gmail.com', 'gưi di', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1257,7 +1265,7 @@ CREATE TABLE `tbl_slider` (
 INSERT INTO `tbl_slider` (`slider_id`, `slider_name`, `slider_status`, `slider_image`, `slider_desc`) VALUES
 (19, 'slide 1', 1, 'slide sss-163385644391.jpg', NULL),
 (21, 'slide 7', 1, 'banner-BLACK-FRIDAY-1024x42777.jpg', 'slide7'),
-(22, 'slide 10', 0, 'banner87.png', 'banner');
+(22, 'slide 10', 1, 'banner87.png', 'banner');
 
 -- --------------------------------------------------------
 
@@ -12787,13 +12795,13 @@ ALTER TABLE `tbl_category_product`
 -- AUTO_INCREMENT for table `tbl_coupon`
 --
 ALTER TABLE `tbl_coupon`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_customers`
 --
 ALTER TABLE `tbl_customers`
-  MODIFY `customer_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `customer_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tbl_feeship`
@@ -12817,13 +12825,13 @@ ALTER TABLE `tbl_introduces`
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `tbl_order_details`
 --
 ALTER TABLE `tbl_order_details`
-  MODIFY `order_details_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `order_details_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `tbl_posts`
@@ -12847,7 +12855,7 @@ ALTER TABLE `tbl_roles`
 -- AUTO_INCREMENT for table `tbl_shipping`
 --
 ALTER TABLE `tbl_shipping`
-  MODIFY `shipping_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `shipping_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tbl_slider`
